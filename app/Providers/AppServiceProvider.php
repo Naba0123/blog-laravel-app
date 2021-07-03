@@ -13,7 +13,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->isLocal()) {
+            $this->registerLocalProviders();
+        }
+    }
+
+    /**
+     * ローカル環境のみ登録 ServiceProvider
+     */
+    protected function registerLocalProviders()
+    {
+        $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
     }
 
     /**
