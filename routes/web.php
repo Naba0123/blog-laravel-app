@@ -16,15 +16,18 @@ Route::get('/', function () {
 });
 
 Route::prefix('/admin')->namespace('Admin')->name('admin.')->group(function() {
+    // 未ログイン
     Route::middleware(['guest'])->group(function() {
         Route::prefix('/auth')->name('auth.')->group(function() {
             Route::get('/', 'AuthController@index')->name('index');
             Route::post('/login', 'AuthController@login')->name('login');
-            Route::post('/logout', 'AuthController@logout')->name('logout');
         });
     });
+    // ログイン済み
     Route::middleware(['auth'])->group(function() {
+        Route::prefix('/auth')->name('auth.')->group(function() {
+            Route::post('/logout', 'AuthController@logout')->name('logout');
+        });
         Route::get('/', 'IndexController@index')->name('index');
     });
-
 });
