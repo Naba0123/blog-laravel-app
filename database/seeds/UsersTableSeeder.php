@@ -14,8 +14,8 @@ class UsersTableSeeder extends Seeder
     {
         User::create([
             'name' => 'admin',
-            'username' => config('user.admin.username'),
-            'password_hash' => \Hash::make(config('user.admin.password')),
+            'email' => config('user.admin.email'),
+            'password' => \Hash::make(config('user.admin.password')),
         ]);
     }
 }
