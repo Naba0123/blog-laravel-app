@@ -2,18 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
-class AuthController extends Controller
+class AuthController extends AdminAbstractController
 {
     use AuthenticatesUsers;
-
-    /**
-     * @inheritdoc
-     */
-    protected $redirectTo = '/admin';
 
     /**
      * @param Request $request
@@ -29,6 +23,6 @@ class AuthController extends Controller
      */
     protected function loggedOut(Request $request)
     {
-        return redirect($this->redirectTo);
+        return redirect()->route('admin.dashboard.index');
     }
 }

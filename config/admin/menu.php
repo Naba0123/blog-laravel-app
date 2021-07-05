@@ -3,7 +3,7 @@
 return [
     'items' => [
         [
-            'route' => 'admin.index',
+            'route' => 'admin.dashboard.index',
             'icon' => 'fas fa-tachometer-alt',
             'text' => 'Dashboard',
         ],
@@ -14,7 +14,7 @@ return [
                 [
 //                    'icon' => '',
                     'text' => 'General',
-                    'route' => 'admin.index',
+                    'route' => 'admin.dashboard.index',
                 ],
             ],
         ]

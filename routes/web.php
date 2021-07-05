@@ -25,11 +25,14 @@ Route::prefix('/admin')->namespace('Admin')->name('admin.')->group(function() {
     });
     // ログイン済み
     Route::middleware(['auth'])->group(function() {
+        Route::get('/', 'IndexController@index');
         Route::prefix('/auth')->name('auth.')->group(function() {
             Route::post('/logout', 'AuthController@logout')->name('logout');
         });
         // Dashboard
-        Route::get('/', 'DashboardController@index')->name('index');
+        Route::prefix('/dashboard')->name('dashboard.')->group(function() {
+            Route::get('/', 'DashboardController@index')->name('index');
+        });
         // Article
         Route::prefix('/article')->name('article.')->group(function() {
             Route::get('/', 'ArticleController@index')->name('index');
