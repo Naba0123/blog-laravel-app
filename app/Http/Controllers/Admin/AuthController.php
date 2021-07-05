@@ -15,7 +15,7 @@ class AuthController extends AdminAbstractController
      */
     public function index(Request $request)
     {
-        return view('admin.auth.index');
+        return $this->_view('admin.auth.index');
     }
 
     /**

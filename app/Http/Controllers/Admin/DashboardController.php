@@ -8,6 +8,6 @@ class DashboardController extends AdminAbstractController
 {
     public function index(Request $request)
     {
-        return view('admin.dashboard.index');
+        return $this->_view('admin.dashboard.index');
     }
 }
