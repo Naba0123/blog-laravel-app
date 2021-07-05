@@ -28,6 +28,15 @@ Route::prefix('/admin')->namespace('Admin')->name('admin.')->group(function() {
         Route::prefix('/auth')->name('auth.')->group(function() {
             Route::post('/logout', 'AuthController@logout')->name('logout');
         });
-        Route::get('/', 'IndexController@index')->name('index');
+        // Dashboard
+        Route::get('/', 'DashboardController@index')->name('index');
+        // Article
+        Route::prefix('/article')->name('article.')->group(function() {
+            Route::get('/', 'ArticleController@index')->name('index');
+        });
+        // Setting
+        Route::prefix('/setting')->name('setting.')->group(function() {
+            Route::get('/general', 'SettingController@general')->name('general');
+        });
     });
 });
