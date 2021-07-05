@@ -3,7 +3,7 @@
 @endphp
 
 <li class="nav-item">
-    <a href="{{ $existSubMenu ? '#' : route($item['route']) }}" class="nav-link">
+    <a href="{{ $existSubMenu ? '#' : url($item['url']) }}" class="nav-link">
         <i class="nav-icon {{ $item['icon'] ?? 'far fa-circle' }}"></i>
         <p>
             {{ $item['text'] }}

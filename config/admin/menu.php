@@ -3,7 +3,7 @@
 return [
     'items' => [
         [
-            'route' => 'admin.dashboard.index',
+            'url' => 'admin/dashboard',
             'icon' => 'fas fa-tachometer-alt',
             'text' => 'Dashboard',
         ],
@@ -14,12 +14,12 @@ return [
                 [
                     'icon' => 'far fa-circle',
                     'text' => 'Article List',
-                    'route' => 'admin.article.list',
+                    'url' => 'admin/article/list',
                 ],
                 [
                     'icon' => 'far fa-circle',
                     'text' => 'Category',
-                    'route' => 'admin.article.category',
+                    'url' => 'admin/category/list',
                 ],
             ]
         ],
@@ -30,7 +30,7 @@ return [
                 [
                     'icon' => 'far fa-circle',
                     'text' => 'General Setting',
-                    'route' => 'admin.dashboard.index',
+                    'url' => 'admin/setting/general',
                 ],
             ],
         ]
