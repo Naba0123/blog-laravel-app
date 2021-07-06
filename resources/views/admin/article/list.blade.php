@@ -14,7 +14,7 @@
                     <th>body</th>
                     <th>created_at</th>
                     <th>updated_at</th>
-                    <th>operation</th>
+                    <th>Operation</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,6 +29,11 @@
                             <a href="{{ route('admin.article.edit', ['id' => $article->id]) }}">
                                 <button type="button" class="btn btn-primary btn-sm">Edit</button>
                             </a>
+                            <form action="{{ route('admin.article.delete') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $article->id }}"/>
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

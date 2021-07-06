@@ -50,14 +50,11 @@ class ArticleController extends AdminAbstractController
     public function save(Request $request)
     {
         try {
-            $v = \Validator::make($request->all(), [
+            $this->validate($request, [
                 'id' => 'integer|min:0',
                 'title' => 'required|string',
                 'body' => 'required|string',
             ]);
-            if ($v->fails()) {
-                throw new \Exception(implode(', ', $v->errors()->all()));
-            }
 
             DB::beginTransaction();
 
@@ -75,6 +72,32 @@ class ArticleController extends AdminAbstractController
         }
 
         return redirect()->route('admin.article.list')->with('success', 'Saved');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function delete(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'id' => 'required|integer|min:0'
+            ]);
+
+            DB::beginTransaction();
+
+            app(ArticleService::class)->deleteArticle($request->id);
+
+            DB::commit();
+        } catch (\Exception $exception) {
+            \Log::error($exception);
+            DB::rollBack();
+            return redirect()->back()->withException($exception);
+        }
+
+        return redirect()->route('admin.article.list')->with('success', 'Deleted');
     }
 
     /**

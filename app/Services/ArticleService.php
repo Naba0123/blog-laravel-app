@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Exceptions\CriticalException;
 use App\Models\User\UArticle;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -48,6 +49,22 @@ class ArticleService extends AbstractService
         $article->body = $body;
 
         $article->save();
+    }
+
+    /**
+     * 記事の削除
+     *
+     * @param int $id
+     * @throws CriticalException
+     */
+    public function deleteArticle(int $id)
+    {
+        $article = $this->getArticle($id);
+        if (is_null($article)) {
+            throw new CriticalException('Unknown UArticle Id');
+        }
+
+        $article->delete();
     }
 
 }

@@ -17,9 +17,20 @@ return [
                     'url' => 'admin/article/list',
                 ],
                 [
+                    'is_hidden' => true,
+                    'text' => 'Article Edit',
+                    'url' => 'admin/article/edit',
+                ],
+            ]
+        ],
+        [
+            'icon' => 'far fa-circle',
+            'text' => 'Category',
+            'submenu' => [
+                [
                     'icon' => 'far fa-circle',
                     'text' => 'Category',
-                    'url' => 'admin/article/category',
+                    'url' => 'admin/category/list',
                 ],
             ]
         ],

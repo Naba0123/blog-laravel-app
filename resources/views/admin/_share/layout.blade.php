@@ -32,12 +32,6 @@
 
     <div class="wrapper">
 
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ url('vendor/adminlte/dist/img/AdminLTELogo.png') }}"
-                 alt="AdminLTELogo" height="60" width="60">
-        </div>
-
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -202,21 +196,29 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">{{ $_currentMenu['text'] ?? '-' }}</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
-                                @foreach ($_breadcrumbs as $i => $breadcrumb)
-                                    @if (count($_breadcrumbs) - 1 != $i)
-                                        <li class="breadcrumb-item">{{ $breadcrumb['text'] }}</li>
-                                    @else
-                                        <li class="breadcrumb-item active">{{ $breadcrumb['text'] }}</li>
-                                    @endif
-                                @endforeach
-                            </ol>
-                        </div><!-- /.col -->
+                        @if ($_currentMenu)
+                            <div class="col-sm-6">
+                                <h1 class="m-0">{{ $_currentMenu['text'] }}</h1>
+                            </div><!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
+                                    @foreach ($_breadcrumbs as $i => $breadcrumb)
+                                        @if (count($_breadcrumbs) - 1 != $i)
+                                            <li class="breadcrumb-item">{{ $breadcrumb['text'] }}</li>
+                                        @else
+                                            <li class="breadcrumb-item active">{{ $breadcrumb['text'] }}</li>
+                                        @endif
+                                    @endforeach
+                                </ol>
+                            </div><!-- /.col -->
+                        @else
+                            <div class="col-12">
+                                <a href="{{ back()->getTargetUrl() }}">
+                                    <button type="button" class="btn btn-default">Back</button>
+                                </a>
+                            </div>
+                        @endif
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
