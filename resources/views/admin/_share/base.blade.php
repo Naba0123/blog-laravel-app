@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('blog.common.title') }}@if(true) | a @endif</title>
+    <title>{{ setting('blog_title') }}@if(true) | a @endif</title>
     @yield('head-content')
 </head>
 @yield('body')

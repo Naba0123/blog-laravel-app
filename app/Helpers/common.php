@@ -9,7 +9,7 @@ if (!function_exists('setting')) {
      */
     function setting(string $key): string
     {
-        return app(\App\Services\SettingService::class)->getSetting($key);
+        return app(\App\Services\SettingService::class)->getSetting($key) ?? '';
     }
 }
 

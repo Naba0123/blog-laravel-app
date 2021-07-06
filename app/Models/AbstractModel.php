@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AbstractModel extends Model
 {
-    /** @var string[]  */
+    /** @var string[] @inheritdoc  */
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     /** @var Collection 一時キャッシュ */
@@ -39,7 +39,7 @@ class AbstractModel extends Model
     public static function gets(): Collection
     {
         if (!static::$_isSetCacheData) {
-            static::$_cacheData = static::getsByDb()->keyBy(static::_getKey());
+            static::$_cacheData = static::getsByDb()->keyBy((new static)->getKey());
             static::$_isSetCacheData = true;
         }
 
@@ -64,13 +64,4 @@ class AbstractModel extends Model
         static::$_isSetCacheData = false;
     }
 
-    /**
-     * TODO: この関数あとで消したい
-     *
-     * @return mixed
-     */
-    protected static function _getKey()
-    {
-        return (new static)->getKey();
-    }
 }

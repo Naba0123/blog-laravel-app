@@ -19,7 +19,7 @@ return [
                 [
                     'icon' => 'far fa-circle',
                     'text' => 'Category',
-                    'url' => 'admin/category/list',
+                    'url' => 'admin/article/category',
                 ],
             ]
         ],
