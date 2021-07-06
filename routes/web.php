@@ -36,6 +36,8 @@ Route::prefix('/admin')->namespace('Admin')->name('admin.')->group(function() {
         // Article
         Route::prefix('/article')->name('article.')->group(function() {
             Route::get('/list', 'ArticleController@list')->name('list');
+            Route::get('/edit', 'ArticleController@edit')->name('edit');
+            Route::post('/save', 'ArticleController@save')->name('save');
             Route::get('/category', 'ArticleController@category')->name('category');
         });
         // Setting

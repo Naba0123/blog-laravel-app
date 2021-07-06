@@ -21,6 +21,10 @@ class AdminAbstractController extends Controller
 
         $params['_breadcrumbs'] = $this->_breadcrumbs($request);
         $params['_currentMenu'] = last($params['_breadcrumbs']);
+        $params['_sessionExceptionType'] =
+            config('admin.session.error_class.' . session('exception'),
+            config('admin.session.error_class.default', 'danger')
+        );
 
         $this->_assignParams = $params;
     }

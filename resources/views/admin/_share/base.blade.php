@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ setting('blog_title') }}@if(true) | a @endif</title>
+    <title>{{ $_currentMenu['text'] ?? '-' }} | {{ setting('blog_title') }}</title>
     @yield('head-content')
 </head>
 @yield('body')
