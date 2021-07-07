@@ -9,8 +9,8 @@ if (!function_exists('setting')) {
      */
     function setting(string $key, string $default = ''): string
     {
-        $value = app(\App\Services\SettingService::class)->getSetting($key);
-        return is_null($value) ? $default : $value;
+        $setting = app(\App\Services\SettingService::class)->getSetting($key);
+        return is_null($setting) ? $default : $setting->value;
     }
 }
 

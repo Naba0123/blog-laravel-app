@@ -1,9 +1,15 @@
 <?php
 
-return [
+use App\Models\Common\CBlogSetting;
 
+return [
     /**
-     * Blog Title
+     * Max Blog Title Length
      */
-    'title' => env('BLOG_TITLE', 'Blog Title'),
+    'max_blog_title_length' => 32,
+
+    'default_values' => [
+        CBlogSetting::KEY_BLOG_TITLE => 'Blog Title',
+        CBlogSetting::KEY_BLOG_DESCRIPTION => 'Blog Description',
+    ],
 ];

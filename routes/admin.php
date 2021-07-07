@@ -43,6 +43,7 @@ Route::prefix('/admin')->namespace('Admin')->name('admin.')->group(function() {
         // Setting
         Route::prefix('/setting')->name('setting.')->group(function() {
             Route::get('/general', 'SettingController@general')->name('general');
+            Route::post('/general/save', 'SettingController@saveGeneral')->name('general.save');
         });
     });
 });

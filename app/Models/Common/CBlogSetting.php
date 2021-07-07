@@ -10,4 +10,12 @@ class CBlogSetting extends AbstractModel
 
     const KEY_BLOG_TITLE = 'blog_title';
     const KEY_BLOG_DESCRIPTION = 'blog_description';
+
+    /**
+     * 有効な設定キー
+     */
+    const ENABLE_SETTING_KEYS = [
+        self::KEY_BLOG_TITLE,
+        self::KEY_BLOG_DESCRIPTION,
+    ];
 }

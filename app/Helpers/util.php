@@ -1,16 +1,14 @@
 <?php
 
-if (!function_exists('str')) {
+if (!function_exists('carbon_now')) {
     /**
-     * ブログ設定値を取得
+     * 必ず固定時間を返す
      *
-     * @param string $key
-     * @return string
+     * @return \Carbon\CarbonImmutable
      */
-    function str(string $baseStr): string
+    function carbon_now(): \Carbon\CarbonImmutable
     {
-        $value = app(\App\Services\SettingService::class)->getSetting($key);
-        return is_null($value) ? $default : $value;
+        return app('carbon_now');
     }
 }
 

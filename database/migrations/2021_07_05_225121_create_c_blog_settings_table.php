@@ -15,12 +15,10 @@ class CreateCBlogSettingsTable extends Migration
     {
         Schema::create('c_blog_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('key');
-            $table->string('key_sub')->nullable();
+            $table->string('key')->unique();
             $table->string('value');
             $table->timestamps();
 
-            $table->unique(['key', 'key_sub']);
         });
     }
 

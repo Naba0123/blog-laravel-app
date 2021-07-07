@@ -64,4 +64,14 @@ class AbstractModel extends Model
         static::$_isSetCacheData = false;
     }
 
+    /**
+     * テーブル名取得
+     *
+     * @return string
+     */
+    public static function getTableName(): string
+    {
+        return (new static)->getTable();
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,6 +35,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->_setCarbonNow();
+    }
+
+    /**
+     * carbon_now 設定
+     */
+    protected function _setCarbonNow()
+    {
+        $this->app->singleton('carbon_now', function() {
+            return CarbonImmutable::now();
+        });
     }
 }

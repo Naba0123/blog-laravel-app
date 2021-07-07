@@ -18,7 +18,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <p class="h1"><b>{{ config('blog.common.title') }}</b></p>
+                <p class="h1"><b>{{ setting('blog_title') }}</b></p>
             </div>
             <div class="card-body">
 
