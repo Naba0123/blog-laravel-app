@@ -18,6 +18,7 @@ class AdminAbstractController extends Controller
     public function __construct()
     {
         $request = request();
+        $params = [];
 
         $params['_breadcrumbs'] = $this->_breadcrumbs($request);
         $params['_currentMenu'] = last($params['_breadcrumbs']);
