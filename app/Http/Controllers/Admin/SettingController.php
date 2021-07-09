@@ -14,7 +14,7 @@ class SettingController extends AdminAbstractController
      */
     public function general(Request $request)
     {
-        return $this->_view('admin.setting.general');
+        return view('admin.setting.general');
     }
 
     /**

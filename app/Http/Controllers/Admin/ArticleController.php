@@ -19,7 +19,7 @@ class ArticleController extends AdminAbstractController
     {
         $articles = app(ArticleService::class)->getArticles();
 
-        return $this->_view('admin.article.list', [
+        return view('admin.article.list', [
             'articles' => $articles,
         ]);
     }
@@ -37,7 +37,7 @@ class ArticleController extends AdminAbstractController
             $article = new UArticle();
         }
 
-        return $this->_view('admin.article.edit', [
+        return view('admin.article.edit', [
             'article' => $article,
         ]);
     }
@@ -106,6 +106,6 @@ class ArticleController extends AdminAbstractController
      */
     public function category(Request $request)
     {
-        return $this->_view('admin.article.category');
+        return view('admin.article.category');
     }
 }

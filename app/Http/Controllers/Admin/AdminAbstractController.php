@@ -11,11 +11,17 @@ use Illuminate\View\View;
 class AdminAbstractController extends Controller
 {
     /**
-     * @var array Common Bind Parameter
+     * AdminAbstractController constructor.
      */
-    protected array $_assignParams = [];
-
     public function __construct()
+    {
+        $this->_assignViewShareVariable();
+    }
+
+    /**
+     * ビュー共通変数の設定
+     */
+    protected function _assignViewShareVariable()
     {
         $request = request();
         $params = [];
@@ -24,23 +30,12 @@ class AdminAbstractController extends Controller
         $params['_currentMenu'] = last($params['_breadcrumbs']);
         $params['_sessionExceptionType'] =
             config('admin.session.error_class.' . session('exception'),
-            config('admin.session.error_class.default', 'danger')
-        );
+                config('admin.session.error_class.default', 'danger')
+            );
 
-        $this->_assignParams = $params;
-    }
-
-    /**
-     * View
-     *
-     * @param string $viewPath
-     * @param array $params
-     * @return View
-     */
-    protected function _view(string $viewPath, array $params = [])
-    {
-        $params = array_merge($this->_assignParams, $params);
-        return view($viewPath, $params);
+        foreach ($params as $key => $value) {
+            \View::share($key, $value);
+        }
     }
 
     /**
