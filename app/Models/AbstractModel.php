@@ -15,7 +15,6 @@ class AbstractModel extends Model
 
     /** @var Collection 一時キャッシュ */
     private static Collection $_cacheData;
-    private static bool $_isSetCacheData = false;
 
     /** @var string Observer に登録するクラス */
     protected static string $_observerClass = ModelObserver::class;
@@ -29,6 +28,9 @@ class AbstractModel extends Model
 
         // Observer 登録
         static::observe(static::$_observerClass);
+
+        // 変数初期化
+        static::$_cacheData = new Collection();
     }
 
     /**
@@ -38,22 +40,11 @@ class AbstractModel extends Model
      */
     public static function gets(): Collection
     {
-        if (!static::$_isSetCacheData) {
-            static::$_cacheData = static::getsByDb()->keyBy((new static)->getKey());
-            static::$_isSetCacheData = true;
+        if (!isset(static::$_cacheData[static::class])) {
+            static::$_cacheData[static::class] = static::get()->keyBy((new static)->getKey());
         }
 
-        return static::$_cacheData;
-    }
-
-    /**
-     * 全レコード取得（DBから）
-     *
-     * @return Collection
-     */
-    public static function getsByDb(): Collection
-    {
-        return static::get();
+        return static::$_cacheData[static::class];
     }
 
     /**
@@ -61,7 +52,7 @@ class AbstractModel extends Model
      */
     public static function clearCacheData()
     {
-        static::$_isSetCacheData = false;
+        unset(static::$_cacheData[static::class]);
     }
 
     /**
