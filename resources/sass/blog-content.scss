@@ -1,0 +1,26 @@
+// share
+
+.bg-base {
+    background-image: url(/image/bg_texture.png);
+}
+
+body {
+    background-color: #7DB9DA;
+}
+
+header {
+    text-align: center;;
+}
+
+div.main-contents div.container {
+    background-color: whitesmoke;
+    box-shadow: 0 0 5px gray;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+footer {
+    text-align: center;
+}

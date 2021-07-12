@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="{{ url('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ url('css/main.css') }}" rel="stylesheet">
+    <link href="{{ mix('dist/blog.css') }}" rel="stylesheet">
 
     <title>{{ setting('blog_title') }}</title>
 
