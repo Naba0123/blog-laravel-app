@@ -13,7 +13,7 @@
 
     @yield('content-css')
 </head>
-<body class="bg-base">
+<body class="lb-bg">
 
 <header>
     <div class="container">
@@ -22,8 +22,10 @@
 </header>
 
 <div class="main-contents">
-    <div class="container bg-base">
-        @yield('content')
+    <div class="container">
+        <div class="lb-bg lb-contents">
+            @yield('content')
+        </div>
     </div>
 </div>
 
