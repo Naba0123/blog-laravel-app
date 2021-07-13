@@ -1,3 +1,16 @@
-.lb-bg {
-    background-image: url(/image/bg_texture.png);
+@import "variables";
+
+.lb-bg-mizu-byakugun {
+    background-image: $bgPattern, linear-gradient(#81C7D4, #78C2C4);
 }
+
+.lb-bg-lightgray {
+    background-color: lightgray;
+    background-image: $bgPattern;
+}
+
+.lb-bg-gofun {
+    background-color: #FFFFFB;
+    background-image: $bgPattern;
+}
+

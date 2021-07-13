@@ -25,3 +25,14 @@ if (!function_exists('markdown_to_html')) {
     }
 }
 
+if (!function_exists('lang')) {
+    /**
+     * 言語取得
+     *
+     * @return string
+     */
+    function lang(): string
+    {
+        return str_replace('_', '-', app()->getLocale());
+    }
+}

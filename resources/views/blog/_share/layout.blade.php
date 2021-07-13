@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ lang() }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +13,7 @@
 
     @yield('content-css')
 </head>
-<body class="lb-bg">
+<body class="lb-bg-mizu-byakugun">
 
 <header>
     <div class="container">
@@ -23,11 +23,9 @@
     </div>
 </header>
 
-<div class="main-contents">
-    <div class="container">
-        <div class="lb-bg lb-contents">
-            @yield('content')
-        </div>
+<div class="container">
+    <div class="lb-bg-gofun lb-contents">
+        @yield('content')
     </div>
 </div>
 
