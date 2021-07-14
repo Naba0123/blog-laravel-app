@@ -9,12 +9,20 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <label for="labelFormTitle">ID</label>
-                    <input type="text" name="id" value="{{ $article->id ?? 0 }}" class="form-control" id="labelFormTitle" readonly>
+                    <label for="lb-form-id">Article ID</label>
+                    <input type="text" name="article_id" value="{{ $article->id ?? 0 }}" class="form-control" id="lb-form-id" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="labelFormTitle">Title</label>
-                    <input type="text" name="title" value="{{ $article->title ?? old('title') }}" class="form-control" id="labelFormTitle" placeholder="Enter Title" required>
+                    <label for="lb-form-title">Title</label>
+                    <input type="text" name="title" value="{{ $article->title ?? old('title') }}" class="form-control" id="lb-form-title" placeholder="Enter Title" required>
+                </div>
+                <div class="form-group">
+                    <label for="lb-form-category">Category</label>
+                    <select multiple="" class="form-control" name="category_ids[]" id="lb-form-category">
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>Textarea</label>

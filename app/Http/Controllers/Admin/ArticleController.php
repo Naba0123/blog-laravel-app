@@ -28,17 +28,21 @@ class ArticleController extends AdminAbstractController
      * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function edit(Request $request)
+    public function edit(Request $request, int $article_id)
     {
-        $id = $request->get('id');
-        if ($id) {
-            $article = app(ArticleService::class)->getArticle($id);
+        $articleService = app(ArticleService::class);
+
+        if ($article_id) {
+            $article = $articleService->getArticle($article_id);
         } else {
             $article = new UArticle();
         }
 
+        $categories = $articleService->getCategories();
+
         return view('admin.article.edit', [
             'article' => $article,
+            'categories' => $categories,
         ]);
     }
 
@@ -50,25 +54,25 @@ class ArticleController extends AdminAbstractController
     public function save(Request $request)
     {
         try {
+
             $this->validate($request, [
-                'id' => 'integer|min:0',
+                'article_id' => 'required|' . ($request->article_id ? 'exists:u_articles,id' : ''),
                 'title' => 'required|string',
+                'category_ids' => 'array',
                 'body' => 'required|string',
             ]);
 
-            DB::beginTransaction();
-
-            app(ArticleService::class)->saveArticle(
-                $request->id,
-                $request->title,
-                $request->body
-            );
-
-            DB::commit();
-        } catch (\Exception $exception) {
-            \Log::error($exception);
-            DB::rollBack();
-            return redirect()->back()->withException($exception);
+            \DB::transaction(function() use ($request) {
+                app(ArticleService::class)->saveArticle(
+                    $request->article_id,
+                    $request->title,
+                    $request->category_ids ?: [],
+                    $request->body,
+                );
+            });
+        } catch (\Throwable $throwable) {
+            \Log::error($throwable);
+            return redirect()->back()->withException($throwable)->withInput();
         }
 
         return redirect()->route('admin.article.list')->with('success', 'Saved');
@@ -83,12 +87,12 @@ class ArticleController extends AdminAbstractController
     {
         try {
             $this->validate($request, [
-                'id' => 'required|integer|min:0'
+                'article_id' => 'required|integer|min:0'
             ]);
 
             DB::beginTransaction();
 
-            app(ArticleService::class)->deleteArticle($request->id);
+            app(ArticleService::class)->deleteArticle($request->article_id);
 
             DB::commit();
         } catch (\Exception $exception) {

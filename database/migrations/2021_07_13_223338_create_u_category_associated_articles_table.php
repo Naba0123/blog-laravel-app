@@ -13,10 +13,10 @@ class CreateUCategoryAssociatedArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('u_category_associated_article', function (Blueprint $table) {
+        Schema::create('u_category_associated_articles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('u_article_id');
-            $table->unsignedBigInteger('c_category_id');
+            $table->unsignedBigInteger('c_category_id')->index();
             $table->timestamps();
 
             $table->unique(['u_article_id', 'c_category_id'], 'unq1');
@@ -30,6 +30,6 @@ class CreateUCategoryAssociatedArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('u_category_associated_article');
+        Schema::dropIfExists('u_category_associated_articles');
     }
 }

@@ -21,15 +21,15 @@ Route::middleware(['auth'])->group(function() {
     // Article
     Route::prefix('/article')->name('article.')->group(function() {
         Route::get('/list', 'ArticleController@list')->name('list');
-        Route::get('/edit', 'ArticleController@edit')->name('edit');
+        Route::get('/edit/{article_id}', 'ArticleController@edit')->name('edit');
         Route::post('/save', 'ArticleController@save')->name('save');
         Route::post('/delete', 'ArticleController@delete')->name('delete');
     });
     Route::prefix('/category')->name('category.')->group(function() {
         Route::get('/list', 'CategoryController@list')->name('list');
         Route::middleware(['json_response'])->group(function() {
-            Route::post('/save', 'CategoryController@saveAjax')->name('save.ajax');
-            Route::post('/delete', 'CategoryController@deleteAjax')->name('delete.ajax');
+            Route::post('/save', 'CategoryController@save')->name('save');
+            Route::post('/delete', 'CategoryController@delete')->name('delete');
         });
     });
     // Setting

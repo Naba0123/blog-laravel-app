@@ -3,17 +3,17 @@
 @section('content')
     <div class="card card-primary">
         <div class="card-body">
-            <a href="{{ route('admin.article.edit') }}">
+            <a href="{{ route('admin.article.edit', ['article_id' => 0]) }}">
                 <button type="button" class="btn btn-primary mb-2">New Article</button>
             </a>
-            <table id="dataTable" class="table table-bordered table-hover">
+            <table id="lb-table" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>id</th>
-                    <th>title</th>
-                    <th>body</th>
-                    <th>created_at</th>
-                    <th>updated_at</th>
+                    <th>Article ID</th>
+                    <th>Title</th>
+                    <th>Body</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
                     <th>Operation</th>
                 </tr>
                 </thead>
@@ -26,12 +26,12 @@
                         <td>{{ $article->created_at }}</td>
                         <td>{{ $article->updated_at }}</td>
                         <td>
-                            <a href="{{ route('admin.article.edit', ['id' => $article->id]) }}">
+                            <a href="{{ route('admin.article.edit', ['article_id' => $article->id]) }}">
                                 <button type="button" class="btn btn-primary btn-sm">Edit</button>
                             </a>
                             <form action="{{ route('admin.article.delete') }}" method="post">
                                 @csrf
-                                <input type="hidden" name="id" value="{{ $article->id }}"/>
+                                <input type="hidden" name="article_id" value="{{ $article->id }}"/>
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
                         </td>
@@ -46,7 +46,7 @@
 @section('content-script')
     <script>
         $(function() {
-            // $('#dataTable').dataTable({});
+            $('#lb-table').dataTable({});
         });
     </script>
 @endsection

@@ -28,15 +28,21 @@ class CategoryController extends AdminAbstractController
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|mixed|string
      */
-    public function saveAjax(Request $request)
+    public function save(Request $request)
     {
         try {
             $this->validate($request, [
-                'id' => 'required|integer|min:0',
+                'category_id' => 'required|integer|min:0',
                 'name' => 'required|string|min:0',
             ]);
-        } catch (\Throwable $exception) {
-            return admin_ajax_failure();
+
+            \DB::transaction(function() use ($request) {
+                app(ArticleService::class)->saveCategory(
+                    $request->category_id, $request->name
+                );
+            });
+        } catch (\Throwable $throwable) {
+            return json_failure($throwable);
         }
 
         return redirect()->route('admin.category.list')->with('success', 'Saved');
@@ -46,14 +52,18 @@ class CategoryController extends AdminAbstractController
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteAjax(Request $request)
+    public function delete(Request $request)
     {
         try {
             $this->validate($request, [
-
+                'category_id' => 'required|integer|min:0',
             ]);
-        } catch (\Throwable $exception) {
-            return redirect()->back()->withException($exception);
+
+            \DB::transaction(function() use ($request) {
+                app(ArticleService::class)->deleteCategory($request->category_id);
+            });
+        } catch (\Throwable $throwable) {
+            return json_failure($throwable);
         }
 
         return redirect()->route('admin.category.list')->with('success', 'Saved');
