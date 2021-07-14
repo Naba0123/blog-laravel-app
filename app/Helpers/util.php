@@ -36,3 +36,47 @@ if (!function_exists('lang')) {
         return str_replace('_', '-', app()->getLocale());
     }
 }
+
+if (!function_exists('json_success')) {
+    /**
+     * JSONレスポンス成功
+     *
+     * @param array $contents
+     * @return \Illuminate\Http\Response|mixed
+     */
+    function json_success(array $contents = [])
+    {
+        try {
+            return response()->make([
+                'status' => 'OK',
+                'contents' => $contents,
+            ]);
+        } catch (Throwable $throwable) {
+            return json_failure($throwable);
+        }
+    }
+}
+
+if (!function_exists('json_failure')) {
+    /**
+     * JSONレスポンス失敗
+     *
+     * @param Throwable|null $throwable
+     * @return \Illuminate\Http\Response|mixed|string
+     */
+    function json_failure(Throwable $throwable = null)
+    {
+        try {
+            return response()->make([
+                'status' => 'NG',
+                'error' => [
+                    'code' => $throwable->getCode(),
+                    'message' => \App::isProduction() ? __('message.error.default') : $throwable->getMessage()
+                ],
+            ], 500);
+        } catch (Throwable $throwable) {
+            return '';
+        }
+    }
+}
+

@@ -27,6 +27,10 @@ Route::middleware(['auth'])->group(function() {
     });
     Route::prefix('/category')->name('category.')->group(function() {
         Route::get('/list', 'CategoryController@list')->name('list');
+        Route::middleware(['json_response'])->group(function() {
+            Route::post('/save', 'CategoryController@saveAjax')->name('save.ajax');
+            Route::post('/delete', 'CategoryController@deleteAjax')->name('delete.ajax');
+        });
     });
     // Setting
     Route::prefix('/setting')->name('setting.')->group(function() {

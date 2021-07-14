@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Exceptions\CriticalException;
+use App\Models\Common\CCategory;
 use App\Models\User\UArticle;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -38,7 +39,7 @@ class ArticleService extends AbstractService
      * @param string $title
      * @param string $body
      */
-    public function saveArticle(int $id, string $title, string $body)
+    public function saveArticle(int $id, string $title, string $body): UArticle
     {
         if ($id > 0) {
             $article = $this->getArticle($id);
@@ -49,6 +50,8 @@ class ArticleService extends AbstractService
         $article->body = $body;
 
         $article->save();
+
+        return $article;
     }
 
     /**
@@ -65,6 +68,16 @@ class ArticleService extends AbstractService
         }
 
         $article->delete();
+    }
+
+    /**
+     * すべてのカテゴリーを取得
+     *
+     * @return mixed
+     */
+    public function getCategories()
+    {
+        return CCategory::gets();
     }
 
 }

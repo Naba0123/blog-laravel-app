@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCBlogSettingsTable extends Migration
+class CreateUCategoryAssociatedArticlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateCBlogSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('c_blog_settings', function (Blueprint $table) {
+        Schema::create('u_category_associated_article', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('key')->unique();
-            $table->string('value');
+            $table->unsignedBigInteger('u_article_id');
+            $table->unsignedBigInteger('c_category_id');
             $table->timestamps();
+
+            $table->unique(['u_article_id', 'c_category_id'], 'unq1');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateCBlogSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('c_blog_settings');
+        Schema::dropIfExists('u_category_associated_article');
     }
 }
