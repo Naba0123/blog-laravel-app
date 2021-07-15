@@ -1,13 +1,13 @@
 @extends('blog._share.layout', ['title' => $category->name])
 
 @section('content')
-    <div class="lba-article-header">
+    <div class="lb-article-header">
         <h1>{{ $category->name }}</h1>
     </div>
 
     <hr/>
 
-    <div class="lba-article-body">
+    <div class="lb-article-body">
         <div class="row">
             @foreach ($category->articles as $article)
                 <div class="col-6">
@@ -19,7 +19,7 @@
 
     <hr/>
 
-    <div class="lba-article-footer">
+    <div class="lb-article-footer">
         footer
     </div>
 @endsection

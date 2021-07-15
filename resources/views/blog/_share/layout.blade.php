@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="{{ url('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ mix('dist/blog.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('vendor/adminlte/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url('vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ mix('dist/blog.css') }}">
 
     <title>{{ (isset($title) ? $title . ' | ' : '') . setting('blog_title') }}</title>
 
@@ -13,7 +14,7 @@
 
     @yield('content-css')
 </head>
-<body class="lb-bg-mizu-byakugun">
+<body class="lb-bg-wasurenagusa-gunjyo">
 
 <header>
     <div class="container">

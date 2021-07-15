@@ -12,23 +12,16 @@ body {
 
 header {
     text-align: center;
-    a {
-        text-decoration: none;
-        color: $textDefaultColor;
-        &:hover {
-            color: $textDefaultColor;
-        }
+}
+
+a {
+    text-decoration: none;
+    color: $textDefaultColor;
+    &:hover {
+        color: $textLinkColor;
     }
 }
 
 footer {
     text-align: center;
-}
-
-.lb-contents {
-    border: 0.1rem gray;
-    margin: 1.5rem 0;
-    box-shadow: 0 0 0.25rem gray;
-    padding: 1rem;
-    border-radius: 0.25rem;
 }
