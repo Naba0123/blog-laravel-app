@@ -15,7 +15,7 @@ class CreateUArticlesTable extends Migration
     {
         Schema::create('u_articles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
+            $table->string('title')->unique();
             $table->text('body');
             $table->timestamps();
             $table->softDeletes();
