@@ -16,7 +16,7 @@
 </head>
 <body class="lb-bg-wasurenagusa-gunjyo">
 
-<header>
+<header class="lb-bg-gofun">
     <div class="container">
         <a href="{{ url('/') }}">
             <h1>{{ setting('blog_title') }}</h1>
@@ -25,12 +25,10 @@
 </header>
 
 <div class="container">
-    <div class="lb-bg-gofun lb-contents">
-        @yield('content')
-    </div>
+    @yield('content')
 </div>
 
-<footer>
+<footer class="lb-bg-gofun">
     <div class="container">
         @include('blog._share.copyright')
     </div>

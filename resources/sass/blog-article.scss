@@ -11,7 +11,7 @@
 .lb-category-list {
     ul {
         margin-bottom: 0;
-        padding: 0.5rem;
+        padding: 0;
         display: flex;
         flex-wrap: wrap;
         li {
@@ -26,6 +26,18 @@
     justify-content: space-between;
 }
 
-.lb-article-title {
+.lb-article-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5em 0;
+}
 
+.lb-article-categories {
+
+}
+
+.lb-article-created {
+    p {
+        margin: 0;
+    }
 }

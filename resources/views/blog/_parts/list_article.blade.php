@@ -2,10 +2,14 @@
 $detailUrl = route('blog.article.detail', ['article_id' => $article->id]);
 @endphp
 
-<div class="card">
+<div class="card lb-bg-gofun mb-3">
     <div class="card-body">
-        <h5 class="card-title lb-article-title"><a href="{{ $detailUrl }}">{{ $article->title }}</a></h5>
-        @include('blog._parts.category_list', ['categories' => $article->categories])
+        <a href="{{ $detailUrl }}"><h3 class="card-title lb-article-title">{{ $article->title }}</h3></a>
+        <div class="lb-article-info">
+            <div class="lb-article-categories">@include('blog._parts.category_list', ['categories' => $article->categories])</div>
+            <div class="lb-article-created"><p>{{ $article->created_at }}</p></div>
+        </div>
+        <hr/>
         <p class="card-text">{{ mb_strimwidth(strip_tags($article->body_html), 0, 100, '……', 'UTF-8') }}</p>
     </div>
 </div>
