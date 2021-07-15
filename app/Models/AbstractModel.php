@@ -13,8 +13,8 @@ class AbstractModel extends Model
     /** @var string[] @inheritdoc  */
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    /** @var Collection 一時キャッシュ */
-    private static Collection $_cacheData;
+    /** @var array 一時キャッシュ */
+    private static array $_cacheData = [];
 
     /** @var string Observer に登録するクラス */
     protected static string $_observerClass = ModelObserver::class;
@@ -28,9 +28,6 @@ class AbstractModel extends Model
 
         // Observer 登録
         static::observe(static::$_observerClass);
-
-        // 変数初期化
-        static::$_cacheData = new Collection();
     }
 
     /**
