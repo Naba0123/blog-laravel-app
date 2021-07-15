@@ -79,6 +79,17 @@ class ArticleService extends AbstractService
     }
 
     /**
+     * カテゴリー取得
+     *
+     * @param int $categoryId
+     * @return CCategory
+     */
+    public function getCategory(int $categoryId): CCategory
+    {
+        return CCategory::findOrFail($categoryId);
+    }
+
+    /**
      * @param int $categoryId
      * @param string $name
      */

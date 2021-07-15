@@ -20,7 +20,7 @@
                     <label for="lb-form-category">Category</label>
                     <select multiple="" class="form-control" name="category_ids[]" id="lb-form-category">
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ in_array($category->id, $associatedCategoryIds) ? 'selected' : '' }}>{{ $category->name }}</option>
                         @endforeach
                     </select>
                 </div>

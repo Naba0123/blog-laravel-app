@@ -11,8 +11,6 @@ class CCategory extends AbstractModel
 {
     protected $table = 'c_categories';
 
-    protected $fillable = ['id', 'name'];
-
     /**
      * @return Collection
      */

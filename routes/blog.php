@@ -6,7 +6,10 @@ Route::name('main.')->group(function() {
 
 Route::name('article.')->prefix('/article')->group(function() {
     Route::get('/list', 'ArticleController@list')->name('list');
-    Route::get('/{id}', 'ArticleController@detail')->name('detail');
+    Route::get('/{article_id}', 'ArticleController@detail')->name('detail');
 });
 
+Route::name('category.')->prefix('/category')->group(function() {
+    Route::get('/{category_id}', 'CategoryController@detail')->name('detail');
+});
 

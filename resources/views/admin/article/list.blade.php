@@ -11,6 +11,7 @@
                 <tr>
                     <th>Article ID</th>
                     <th>Title</th>
+                    <th>Category</th>
                     <th>Body</th>
                     <th>Created At</th>
                     <th>Updated At</th>
@@ -22,6 +23,7 @@
                     <tr>
                         <td>{{ $article->id }}</td>
                         <td>{{ $article->title }}</td>
+                        <td>{{ $article->categories->pluck('name')->join(', ') }}</td>
                         <td>{{ mb_strimwidth(strip_tags($article->body), 0, 100, '……', 'UTF-8') }}</td>
                         <td>{{ $article->created_at }}</td>
                         <td>{{ $article->updated_at }}</td>

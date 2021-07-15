@@ -39,10 +39,12 @@ class ArticleController extends AdminAbstractController
         }
 
         $categories = $articleService->getCategories();
+        $associatedCategoryIds = $article->categories->pluck('id')->all();
 
         return view('admin.article.edit', [
             'article' => $article,
             'categories' => $categories,
+            'associatedCategoryIds' => $associatedCategoryIds,
         ]);
     }
 

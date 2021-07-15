@@ -3,12 +3,7 @@
 @section('content')
     <div class="lba-article-header">
         <h1>{{ $article->title }}</h1>
-        <div class="lba-article-category">
-            <ul>
-                <li>category</li>
-                <li>category</li>
-            </ul>
-        </div>
+        @include('blog._parts.list_category', ['categories' => $article->categories])
     </div>
 
     <hr/>

@@ -19,11 +19,11 @@ class ArticleController extends BlogAbstractController
         return view('blog.article.list');
     }
 
-    public function detail(Request $request, int $id): View
+    public function detail(Request $request, int $article_id): View
     {
         $articleService = app(ArticleService::class);
 
-        $article = $articleService->getArticle($id);
+        $article = $articleService->getArticle($article_id);
         $bodyHtml = markdown_to_html($article->body);
 
         return view('blog.article.detail', [
