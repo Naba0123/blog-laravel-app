@@ -1,25 +1,14 @@
 @extends('blog._share.layout', ['title' => $category->name])
 
 @section('content')
-    <div class="lb-article-header">
-        <h1>{{ $category->name }}</h1>
+    <div class="lb-content-header">
+        <h2><i class="fa fa-tag"></i> {{ $category->name }}</h2>
     </div>
-
-    <hr/>
 
     <div class="lb-article-body">
-        <div class="row">
-            @foreach ($category->articles as $article)
-                <div class="col-6">
-                    @include('blog._parts.list_article', ['article' => $article])
-                </div>
-            @endforeach
-        </div>
+        @foreach ($category->articles as $article)
+            @include('blog._parts.list_article', ['article' => $article])
+        @endforeach
     </div>
 
-    <hr/>
-
-    <div class="lb-article-footer">
-        footer
-    </div>
 @endsection

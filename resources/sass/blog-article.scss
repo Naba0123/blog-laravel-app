@@ -1,11 +1,19 @@
 @import "variables";
 
-.lb-contents {
+p.lb-header-description {
+    margin: 0;
+}
+
+.lb-content {
     border: 0.1rem gray;
     margin: 1.5rem 0;
     box-shadow: 0 0 0.25rem gray;
     padding: 1rem;
     border-radius: 0.25rem;
+}
+
+.lb-content-header {
+    margin-bottom: 2em;
 }
 
 .lb-category-list {

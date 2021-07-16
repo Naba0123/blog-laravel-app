@@ -18,9 +18,8 @@
 
 <header class="lb-bg-gofun lb-box-shadow">
     <div class="container">
-        <a href="{{ url('/') }}">
-            <h1>{{ setting('blog_title') }}</h1>
-        </a>
+        <h1><a href="{{ url('/') }}">{{ setting('blog_title') }}</a></h1>
+        <p class="lb-header-description">{{ setting('blog_description') }}</p>
     </div>
 </header>
 
