@@ -24,7 +24,7 @@
                         <td>{{ $article->id }}</td>
                         <td>{{ $article->title }}</td>
                         <td>{{ $article->categories->pluck('name')->join(', ') }}</td>
-                        <td>{{ mb_strimwidth(strip_tags($article->body), 0, 100, '……', 'UTF-8') }}</td>
+                        <td>{{ omit_markdown_str($article->body) }}</td>
                         <td>{{ $article->created_at }}</td>
                         <td>{{ $article->updated_at }}</td>
                         <td>

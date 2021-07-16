@@ -13,10 +13,6 @@ class MainController extends BlogAbstractController
     {
         $articles = app(ArticleService::class)->getArticles();
 
-        foreach ($articles as $article) {
-            $article->body_html = markdown_to_html($article->body);
-        }
-
         return view('blog.main.index', ['articles' => $articles]);
     }
 }

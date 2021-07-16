@@ -1,12 +1,16 @@
 <div class="lb-navigation">
-    @if(isset($backUrl) && $backUrl)
-        <a class="btn btn-outline-secondary" href="{{ $backUrl }}">Back</a>
+    @if(isset($prev['url']))
+        <a class="btn btn-outline-secondary" href="{{ $prev['url'] }}">
+            <i class="fa fa-angle-left"></i> {{ $prev['name'] ?? 'Prev' }}
+        </a>
     @else
         <div></div>
     @endif
 
-    @if(isset($nextUrl) && $nextUrl)
-        <a class="btn btn-outline-secondary">Next</a>
+    @if(isset($next['url']))
+        <a class="btn btn-outline-secondary" href="{{ $next['url'] }}">
+            {{ $next['name'] ?? 'Next' }} <i class="fa fa-angle-right"></i>
+        </a>
     @else
         <div></div>
     @endif

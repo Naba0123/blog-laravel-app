@@ -3,7 +3,7 @@
 @section('content')
     <div class="lb-bg-gofun lb-contents">
         <div class="lb-article-header">
-            @include('blog._parts.navigation_buttons')
+            @include('blog._parts.navigation_buttons', ['prev' => $prevLink, 'next' => $nextLink])
 
             <h1 class="lb-article-title">{{ $article->title }}</h1>
 

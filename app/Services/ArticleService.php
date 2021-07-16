@@ -34,6 +34,28 @@ class ArticleService extends AbstractService
     }
 
     /**
+     * 特定の記事IDの一つ前の記事を取得
+     *
+     * @param int $currentArticleId
+     * @return UArticle|null
+     */
+    public function getPreviousArticle(int $currentArticleId): ?UArticle
+    {
+        return UArticle::gets()->where('id', '<', $currentArticleId)->sortKeysDesc()->first();
+    }
+
+    /**
+     * 特定の記事IDの次の記事を取得
+     *
+     * @param int $currentArticleId
+     * @return UArticle|null
+     */
+    public function getNextArticle(int $currentArticleId): ?UArticle
+    {
+        return UArticle::gets()->where('id', '>', $currentArticleId)->sortKeys()->first();
+    }
+
+    /**
      * 記事を保存する
      *
      * @param int $articleId
