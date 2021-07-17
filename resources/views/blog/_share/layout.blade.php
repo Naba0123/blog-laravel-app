@@ -29,7 +29,7 @@
 
 <footer class="lb-bg-gofun lb-box-shadow">
     <div class="container">
-        @include('blog._share.copyright')
+        @include('blog._share.footer')
     </div>
 </footer>
 

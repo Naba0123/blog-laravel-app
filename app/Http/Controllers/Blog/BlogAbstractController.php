@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Blog;
 
 
 use App\Http\Controllers\Controller;
+use App\Services\ArticleService;
 
 class BlogAbstractController extends Controller
 {
@@ -23,7 +24,11 @@ class BlogAbstractController extends Controller
     protected function _assignViewShareVariable()
     {
         $request = request();
-        $params = [];
+        $articleService = app(ArticleService::class);
+
+        $params = [
+            'categories' => $articleService->getCategories()
+        ];
 
         foreach ($params as $key => $value) {
             \View::share($key, $value);
