@@ -34,7 +34,7 @@ if (!function_exists('json_success')) {
     function json_success(array $contents = [])
     {
         try {
-            return response()->make([
+            return response()->json([
                 'status' => 'OK',
                 'contents' => $contents,
             ]);
@@ -54,7 +54,7 @@ if (!function_exists('json_failure')) {
     function json_failure(Throwable $throwable = null)
     {
         try {
-            return response()->make([
+            return response()->json([
                 'status' => 'NG',
                 'error' => [
                     'code' => $throwable->getCode(),
@@ -67,3 +67,20 @@ if (!function_exists('json_failure')) {
     }
 }
 
+if (!function_exists('error_messages')) {
+    /**
+     * Get Error Messages from Throwable
+     *
+     * @param Throwable $throwable
+     * @return array
+     */
+    function error_messages(Throwable $throwable): array
+    {
+        if ($throwable instanceof \Illuminate\Validation\ValidationException) {
+            $message = $throwable->validator->errors()->all();
+        } else {
+            $message = [$throwable->getMessage()];
+        }
+        return $message;
+    }
+}

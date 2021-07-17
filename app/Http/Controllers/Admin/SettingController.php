@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Common\CBlogSetting;
 use App\Services\SettingService;
+use DB;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class SettingController extends AdminAbstractController
 {
@@ -19,26 +23,25 @@ class SettingController extends AdminAbstractController
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws ValidationException
+     * @throws Throwable
      */
-    public function saveGeneral(Request $request)
+    public function saveGeneral(Request $request): RedirectResponse
     {
+        $this->validate($request, [
+            CBlogSetting::KEY_BLOG_TITLE => 'required|string|between:1,' . config('blog.common.max_blog_title_length'),
+            CBlogSetting::KEY_BLOG_DESCRIPTION => 'required|string|between:1,' . config('blog.common.max_blog_description_length'),
+        ]);
+
         try {
-            $this->validate($request, [
-                CBlogSetting::KEY_BLOG_TITLE => 'required|string|between:1,' . config('blog.common.max_blog_title_length'),
-            ]);
+            DB::transaction(function () use ($request) {
+                app(SettingService::class)->saveSetting($request->all());
+            });
 
-            \DB::beginTransaction();
-
-            app(SettingService::class)->saveSetting($request->all());
-
-            \DB::commit();
-        } catch (\Throwable $throwable) {
-            \DB::rollBack();
-            return redirect()->back()->withException($throwable);
+            return redirect()->route('admin.setting.general')->withSuccess('Saved General Setting.');
+        } catch (Throwable $throwable) {
+            return back()->withCustomErrors(error_messages($throwable))->withInput();
         }
-
-        return redirect()->route('admin.setting.general')->with('success', 'Saved General Setting.');
     }
 }

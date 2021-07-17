@@ -1,19 +1,25 @@
-@hasSection('exception')
-    @php
-        /** @var Exception $exception */
-        $exception = session('exception')
-    @endphp
-    <div class="card card-{{ $_sessionExceptionType }}">
-        <div class="card-body">
-            <ul>
-                <li>{{ $exception->getMessage() }}</li>
-            </ul>
-        </div>
-    </div>
+@if($success = session('success'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            $(document).Toasts('create', {
+                class: 'bg-success',
+                title: 'Success',
+                body: '{{ $success }}'
+            })
+        });
+    </script>
 @endif
 
-    @hasSection('success')
-        @php
-            $sessionData = session('success')
-        @endphp
-    @endif
+@if ($errors = session('custom_errors'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            @foreach ($errors as $error)
+                $(document).Toasts('create', {
+                    class: 'bg-danger',
+                    title: 'Error',
+                    body: '{{ $error }}'
+                })
+            @endforeach
+        });
+    </script>
+@endif

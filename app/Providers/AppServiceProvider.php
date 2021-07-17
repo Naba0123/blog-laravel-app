@@ -15,14 +15,14 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         if ($this->app->isLocal()) {
-            $this->_registerLocalProviders();
+            $this->_registerDevProviders();
         }
     }
 
     /**
-     * ローカル環境のみ登録 ServiceProvider
+     * 開発環境のみ登録 ServiceProvider
      */
-    protected function _registerLocalProviders()
+    protected function _registerDevProviders()
     {
         $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
@@ -36,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->_setCarbonNow();
+        $this->_setOverrideBind();
     }
 
     /**
@@ -46,5 +47,13 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('carbon_now', function() {
             return CarbonImmutable::now();
         });
+    }
+
+    /**
+     * Laravel 標準を上書きする bind 設定
+     */
+    protected function _setOverrideBind()
+    {
+        $this->app->bind(\Illuminate\Http\RedirectResponse::class, \App\Support\RedirectResponse::class);
     }
 }

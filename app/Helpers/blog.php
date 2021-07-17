@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\ViewErrorBag;
+
 if (!function_exists('setting')) {
     /**
      * ブログ設定値を取得
@@ -42,3 +44,21 @@ if (!function_exists('omit_markdown_str')) {
     }
 }
 
+if (!function_exists('invalid_validation')) {
+    /**
+     * セッション情報に対象フォーム名のバリデーション失敗が入っていれば is-invalid を返す
+     *
+     * @param string $name
+     * @param string $bagName
+     * @return string
+     */
+    function invalid_validation(string $name, string $bagName = 'default'): string
+    {
+        /** @var ViewErrorBag|null $errors */
+        $errors = session('errors');
+        if (is_null($errors) || !$errors->getBag($bagName)->has($name)) {
+            return '';
+        }
+        return 'is-invalid';
+    }
+}
