@@ -76,14 +76,9 @@
             openEditModal: function(category) {
                 let $target = $('#lb-modal-save');
                 let $categoryId = $target.find('input[name=category_id]');
-                const id = category ? category.id : 0;
+                const id = category.id || 0;
                 $categoryId.val(id);
-                if (id > 0) {
-                    $categoryId.parent().show();
-                } else {
-                    $categoryId.parent().hide();
-                }
-                $target.find('input[name=name]').val(category ? category.name : '');
+                $target.find('input[name=name]').val(category.name || '');
                 $target.modal();
             },
         };
