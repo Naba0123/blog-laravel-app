@@ -4,16 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AuthController extends AdminAbstractController
 {
     use AuthenticatesUsers;
 
     /**
+     * View of Authentication
+     *
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         return view('admin.auth.index');
     }

@@ -5,16 +5,20 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Services\ArticleService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class CategoryController extends AdminAbstractController
 {
     /**
-     * カテゴリー一覧ページ
+     * View of category list
      *
      * @param Request $request
+     * @return View
      */
-    public function list(Request $request)
+    public function list(Request $request): View
     {
         $categories = app(ArticleService::class)->getCategories();
 
@@ -25,47 +29,53 @@ class CategoryController extends AdminAbstractController
 
 
     /**
+     * Save Category
+     *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|mixed|string
+     * @return RedirectResponse
+     * @throws ValidationException
      */
-    public function save(Request $request)
+    public function save(Request $request): RedirectResponse
     {
-        try {
-            $this->validate($request, [
-                'category_id' => 'required|integer|min:0',
-                'name' => 'required|string|min:0',
-            ]);
+        $this->validate($request, [
+            'category_id' => 'required|integer|min:0',
+            'name' => 'required|string|min:0',
+        ]);
 
+        try {
             \DB::transaction(function() use ($request) {
                 app(ArticleService::class)->saveCategory(
                     $request->category_id, $request->name
                 );
             });
         } catch (\Throwable $throwable) {
-            return json_failure($throwable);
+            return back()->withInput()->withCustomErrors(error_messages($throwable));
         }
 
-        return redirect()->route('admin.category.list')->with('success', 'Saved');
+        return redirect()->route('admin.category.list')->withSuccess('Saved Category');
     }
 
     /**
+     * Delete Category
+     *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
+     * @throws ValidationException
      */
-    public function delete(Request $request)
+    public function delete(Request $request): RedirectResponse
     {
-        try {
-            $this->validate($request, [
-                'category_id' => 'required|integer|min:0',
-            ]);
+        $this->validate($request, [
+            'category_id' => 'required|integer|min:0',
+        ]);
 
+        try {
             \DB::transaction(function() use ($request) {
                 app(ArticleService::class)->deleteCategory($request->category_id);
             });
         } catch (\Throwable $throwable) {
-            return json_failure($throwable);
+            return back()->withCustomErrors(error_messages($throwable));
         }
 
-        return redirect()->route('admin.category.list')->with('success', 'Saved');
+        return redirect()->route('admin.category.list')->withSuccess('Deleted Category');
     }
 }

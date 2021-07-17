@@ -7,15 +7,20 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User\UArticle;
 use App\Services\ArticleService;
 use DB;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class ArticleController extends AdminAbstractController
 {
     /**
+     * View of article list
+     *
      * @param Request $request
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function list(Request $request)
+    public function list(Request $request): View
     {
         $articles = app(ArticleService::class)->getArticles();
 
@@ -25,14 +30,17 @@ class ArticleController extends AdminAbstractController
     }
 
     /**
+     * View of editing article
+     *
      * @param Request $request
-     * @return \Illuminate\View\View
+     * @param int $article_id
+     * @return View
      */
-    public function edit(Request $request, int $article_id)
+    public function edit(Request $request, int $article_id): View
     {
         $articleService = app(ArticleService::class);
 
-        if ($article_id) {
+        if ($article_id > 0) {
             $article = $articleService->getArticle($article_id);
         } else {
             $article = new UArticle();
@@ -49,21 +57,22 @@ class ArticleController extends AdminAbstractController
     }
 
     /**
+     * Save article
+     *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws ValidationException
      */
-    public function save(Request $request)
+    public function save(Request $request): RedirectResponse
     {
+        $this->validate($request, [
+            'article_id' => 'required|' . ($request->article_id > 0 ? 'exists:u_articles,id' : ''),
+            'title' => 'required|string',
+            'category_ids' => 'array',
+            'body' => 'required|string',
+        ]);
+
         try {
-
-            $this->validate($request, [
-                'article_id' => 'required|' . ($request->article_id ? 'exists:u_articles,id' : ''),
-                'title' => 'required|string',
-                'category_ids' => 'array',
-                'body' => 'required|string',
-            ]);
-
             \DB::transaction(function() use ($request) {
                 app(ArticleService::class)->saveArticle(
                     $request->article_id,
@@ -74,44 +83,34 @@ class ArticleController extends AdminAbstractController
             });
         } catch (\Throwable $throwable) {
             \Log::error($throwable);
-            return redirect()->back()->withException($throwable)->withInput();
+            return back()->withInput()->withCustomErrors(error_messages($throwable));
         }
 
-        return redirect()->route('admin.article.list')->with('success', 'Saved');
+        return redirect()->route('admin.article.list')->withSuccess('Saved Article');
     }
 
     /**
+     * Delete article
+     *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws ValidationException
      */
-    public function delete(Request $request)
+    public function delete(Request $request): RedirectResponse
     {
+        $this->validate($request, [
+            'article_id' => 'required|exists:u_articles,id',
+        ]);
         try {
-            $this->validate($request, [
-                'article_id' => 'required|integer|min:0'
-            ]);
-
-            DB::beginTransaction();
-
-            app(ArticleService::class)->deleteArticle($request->article_id);
-
-            DB::commit();
-        } catch (\Exception $exception) {
-            \Log::error($exception);
-            DB::rollBack();
-            return redirect()->back()->withException($exception);
+            DB::transaction(function() use ($request) {
+                app(ArticleService::class)->deleteArticle($request->article_id);
+            });
+        } catch (\Throwable $throwable) {
+            \Log::error($throwable);
+            return back()->withCustomErrors(error_messages($throwable));
         }
 
-        return redirect()->route('admin.article.list')->with('success', 'Deleted');
+        return redirect()->route('admin.article.list')->withSuccess('Deleted Article');
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\View\View
-     */
-    public function category(Request $request)
-    {
-        return view('admin.article.category');
-    }
 }

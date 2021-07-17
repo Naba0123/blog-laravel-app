@@ -8,20 +8,25 @@ use DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 use Throwable;
 
 class SettingController extends AdminAbstractController
 {
     /**
+     * View General Setting
+     *
      * @param Request $request
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function general(Request $request)
+    public function general(Request $request): View
     {
         return view('admin.setting.general');
     }
 
     /**
+     * Save General Setting
+     *
      * @param Request $request
      * @return RedirectResponse
      * @throws ValidationException
@@ -38,10 +43,11 @@ class SettingController extends AdminAbstractController
             DB::transaction(function () use ($request) {
                 app(SettingService::class)->saveSetting($request->all());
             });
-
-            return redirect()->route('admin.setting.general')->withSuccess('Saved General Setting.');
         } catch (Throwable $throwable) {
-            return back()->withCustomErrors(error_messages($throwable))->withInput();
+            \Log::error($throwable);
+            return back()->withInput()->withCustomErrors(error_messages($throwable));
         }
+
+        return redirect()->route('admin.setting.general')->withSuccess('Saved General Setting.');
     }
 }
