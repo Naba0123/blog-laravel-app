@@ -19,7 +19,10 @@
     <div class="col-sm-4">
         <h3>Author</h3>
         <div class="lb-footer-content">
-            わたしです
+            <h4>{{ setting(\App\Models\Common\CBlogSetting::KEY_AUTHOR_NAME) }}</h4>
+            <p>
+                {!! setting(\App\Models\Common\CBlogSetting::KEY_AUTHOR_DESCRIPTION) !!}
+            </p>
         </div>
     </div>
 </div>
