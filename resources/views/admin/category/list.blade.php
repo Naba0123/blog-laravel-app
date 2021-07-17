@@ -6,7 +6,7 @@
             <h3 class="card-title">Category List</h3>
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#lb-modal-save">
+            <button type="button" class="btn btn-primary mb-2 lb-open-edit-modal" data-category="{}">
                 New Category
             </button>
             <table id="lb-table" class="table table-bordered">
@@ -25,7 +25,7 @@
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->articles->count() }}</td>
                         <td>
-                            <button class="btn btn-primary" data-content='@json($category)'>Edit</button>
+                            <button class="btn btn-primary lb-open-edit-modal" data-category='@json($category)'>Edit</button>
                             <form action="{{ route('admin.category.delete') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="category_id" value="{{ $category->id }}"/>
@@ -70,17 +70,29 @@
     </div>
 @endsection
 
-
 @section('content-script')
     <script>
-        lbScript = {
-            openEditModal: () => {
-
+        const lbScript = {
+            openEditModal: function(category) {
+                let $target = $('#lb-modal-save');
+                let $categoryId = $target.find('input[name=category_id]');
+                const id = category ? category.id : 0;
+                $categoryId.val(id);
+                if (id > 0) {
+                    $categoryId.parent().show();
+                } else {
+                    $categoryId.parent().hide();
+                }
+                $target.find('input[name=name]').val(category ? category.name : '');
+                $target.modal();
             },
         };
 
         $(function() {
-            $('#lb-table').dataTable({});
-        })
+            $('#lb-table').dataTable();
+            $('.lb-open-edit-modal').click(function() {
+                lbScript.openEditModal($(this).data('category'));
+            });
+        });
     </script>
 @endsection
