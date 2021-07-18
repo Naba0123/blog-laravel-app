@@ -30,6 +30,7 @@ class SettingService extends AbstractService
         foreach ($settingValues as $settingKey => $settingValue) {
             // 設定できないキーは無視
             if (!in_array($settingKey, CBlogSetting::ENABLE_SETTING_KEYS)) {
+                \Log::info('skip setting key: ' . $settingKey);
                 continue;
             }
             if (($cBlogSetting = $cBlogSettings->get($settingKey)) === null) {

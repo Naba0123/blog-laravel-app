@@ -39,8 +39,6 @@
 
 @section('content-script')
     <script>
-        $(function() {
-            // $('#dataTable').dataTable({});
-        });
+
     </script>
 @endsection

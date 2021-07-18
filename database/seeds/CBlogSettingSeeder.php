@@ -20,7 +20,7 @@ class CBlogSettingSeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now,
             ];
-        }, CBlogSetting::ENABLE_SETTING_KEYS);
+        }, array_keys(config('blog.setting.default_values')));
 
         \DB::table(CBlogSetting::getTableName())->insert($inserts);
     }

@@ -23,8 +23,13 @@ return [
      */
     'max_author_description_length' => 256,
 
+    /**
+     * Default Setting Values
+     */
     'default_values' => [
         CBlogSetting::KEY_BLOG_TITLE => 'Blog Title',
         CBlogSetting::KEY_BLOG_DESCRIPTION => 'Blog Description',
+        CBlogSetting::KEY_AUTHOR_NAME => 'Author Name',
+        CBlogSetting::KEY_AUTHOR_DESCRIPTION => 'Author Description',
     ],
 ];
