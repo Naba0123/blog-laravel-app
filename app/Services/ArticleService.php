@@ -81,7 +81,6 @@ class ArticleService extends AbstractService
      * 記事の削除
      *
      * @param int $articleId
-     * @throws CriticalException
      */
     public function deleteArticle(int $articleId)
     {
@@ -114,8 +113,9 @@ class ArticleService extends AbstractService
     /**
      * @param int $categoryId
      * @param string $name
+     * @return CCategory
      */
-    public function saveCategory(int $categoryId, string $name)
+    public function saveCategory(int $categoryId, string $name): CCategory
     {
         /** @var CCategory $category */
         $category = CCategory::findOrNew($categoryId);

@@ -36,6 +36,17 @@ return [
         ],
         [
             'icon' => 'far fa-circle',
+            'text' => 'Article Image',
+            'submenu' => [
+                [
+                    'icon' => 'far fa-circle',
+                    'text' => 'Article Image List',
+                    'url' => 'admin/article_image/list',
+                ],
+            ]
+        ],
+        [
+            'icon' => 'far fa-circle',
             'text' => 'Setting',
             'submenu' => [
                 [

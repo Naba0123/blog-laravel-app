@@ -27,10 +27,12 @@ Route::middleware(['auth'])->group(function() {
     });
     Route::prefix('/category')->name('category.')->group(function() {
         Route::get('/list', 'CategoryController@list')->name('list');
-        Route::middleware(['json_response'])->group(function() {
-            Route::post('/save', 'CategoryController@save')->name('save');
-            Route::post('/delete', 'CategoryController@delete')->name('delete');
-        });
+        Route::post('/save', 'CategoryController@save')->name('save');
+        Route::post('/delete', 'CategoryController@delete')->name('delete');
+    });
+    Route::prefix('/article_image')->name('article_image.')->group(function() {
+        Route::get('/list', 'ArticleImageController@list')->name('list');
+        Route::post('/upload', 'ArticleImageController@upload')->name('upload');
     });
     // Setting
     Route::prefix('/setting')->name('setting.')->group(function() {
