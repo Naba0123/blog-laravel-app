@@ -13,17 +13,10 @@ class ArticleImageService extends AbstractService
      *
      * @return array
      */
-    public function getImageNames(): array
+    public function getAllImages(): array
     {
         $path = storage_path('app/public/article_image');
-        $files = \File::files($path);
-
-        $ret = [];
-        foreach ($files as $file) {
-            $ret[] = $file->getFilename();
-        }
-
-        return $ret;
+        return \File::files($path);
     }
 
     public function saveImage(UploadedFile $file)

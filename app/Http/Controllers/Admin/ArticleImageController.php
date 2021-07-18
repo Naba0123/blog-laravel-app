@@ -17,7 +17,7 @@ class ArticleImageController extends AdminAbstractController
      */
     public function list(Request $request): View
     {
-        $images = app(ArticleImageService::class)->getImageNames();
+        $images = app(ArticleImageService::class)->getAllImages();
 
         return view('admin.article_image.list', [
             'images' => $images,

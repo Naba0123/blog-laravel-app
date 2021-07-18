@@ -62,3 +62,17 @@ if (!function_exists('invalid_validation')) {
         return 'is-invalid';
     }
 }
+
+if (!function_exists('image_url')) {
+    /**
+     * 画像のURL取得
+     *
+     * @param \Symfony\Component\Finder\SplFileInfo $image
+     * @return string
+     */
+    function image_url(\Symfony\Component\Finder\SplFileInfo $image): string
+    {
+        return \Storage::disk('article_image')->url($image->getFilename() . '?' . $image->getMTime());
+    }
+}
+

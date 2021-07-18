@@ -40,10 +40,11 @@
                 </thead>
                 <tbody>
                 @foreach ($images as $image)
+                    @php /** @var \Symfony\Component\Finder\SplFileInfo $image */ @endphp
                     <tr>
-                        <td>{{ $image }}</td>
-                        <td><img src="{{ url('/storage/article_image/' . $image) }}" height="200"></td>
-                        <td></td>
+                        <td>{{ $image->getFilename() }}</td>
+                        <td><img src="{{ image_url($image) }}" height="200"></td>
+                        <td>{{ number_format(ceil($image->getSize() / 1024)) }} KB</td>
                         <td>
 
                         </td>
