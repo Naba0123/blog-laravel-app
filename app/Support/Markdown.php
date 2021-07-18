@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Support\MarkdownImgPreUrl\ImgPreUrlExtension;
 use Illuminate\Support\HtmlString;
 use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Environment;
@@ -25,6 +26,7 @@ class Markdown
         $environment->addExtension(new TableExtension());
         $environment->addExtension(new AutolinkExtension());
         $environment->addExtension(new YouTubeIframeExtension());
+        $environment->addExtension(new ImgPreUrlExtension());
 
 
         $converter = new CommonMarkConverter([
@@ -34,6 +36,8 @@ class Markdown
             'youtube_iframe_width' => 600,
             'youtube_iframe_height' => 300,
             'youtube_iframe_allowfullscreen' => true,
+            // img-pre-url
+            'img_pre_url-pre_url' => '/storage/article_image/',
         ], $environment);
 
         return new HtmlString($converter->convertToHtml($text ?? ''));
