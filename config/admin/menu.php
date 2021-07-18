@@ -8,7 +8,7 @@ return [
             'text' => 'Dashboard',
         ],
         [
-            'icon' => 'far fa-circle',
+            'icon' => 'far fa-newspaper',
             'text' => 'Article',
             'submenu' => [
                 [
@@ -24,18 +24,18 @@ return [
             ]
         ],
         [
-            'icon' => 'far fa-circle',
+            'icon' => 'fas fa-tags',
             'text' => 'Category',
             'submenu' => [
                 [
                     'icon' => 'far fa-circle',
-                    'text' => 'Category',
+                    'text' => 'Category List',
                     'url' => 'admin/category/list',
                 ],
             ]
         ],
         [
-            'icon' => 'far fa-circle',
+            'icon' => 'far fa-images',
             'text' => 'Article Image',
             'submenu' => [
                 [
@@ -46,13 +46,18 @@ return [
             ]
         ],
         [
-            'icon' => 'far fa-circle',
+            'icon' => 'fas fa-cog',
             'text' => 'Setting',
             'submenu' => [
                 [
                     'icon' => 'far fa-circle',
                     'text' => 'General Setting',
                     'url' => 'admin/setting/general',
+                ],
+                [
+                    'icon' => 'far fa-circle',
+                    'text' => 'User Setting',
+                    'url' => 'admin/setting/user',
                 ],
             ],
         ]

@@ -29,6 +29,8 @@
     <!-- summernote -->
 {{--    <link rel="stylesheet" href="{{ url('vendor/adminlte/plugins/summernote/summernote-bs4.min.css') }}">--}}
 
+    <link rel="stylesheet" href="{{ mix('dist/admin.css') }}">
+
     @yield('content-css')
 @endsection
 
