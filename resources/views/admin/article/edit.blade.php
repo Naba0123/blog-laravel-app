@@ -14,7 +14,7 @@
                 </div>
                 <div class="form-group">
                     <label for="lb-form-title">Title</label>
-                    <input type="text" name="title" value="{{ $article->title ?? old('title') }}" class="form-control" id="lb-form-title" placeholder="Enter Title" required>
+                    <input type="text" name="title" value="{{ old('title') ?: $article->title }}" class="form-control" id="lb-form-title" placeholder="Enter Title" required>
                 </div>
                 <div class="form-group">
                     <label for="lb-form-category">Category</label>
@@ -25,8 +25,15 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Textarea</label>
-                    <textarea name="body" class="form-control" rows="10" placeholder="Enter Body" required>{!! $article->body ?? old('body') !!}</textarea>
+                    <label>Body Markdown</label>
+                    <textarea name="body" class="form-control" rows="10" placeholder="Enter Body" required>{!! old('body') ?: $article->body !!}</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Is Publish</label>
+                    <div class="custom-control custom-switch custom-switch-on-success">
+                        <input name="is_publish" type="checkbox" class="custom-control-input" id="lb-form-is_publish" {{ $article->is_publish ? 'checked' : '' }}>
+                        <label class="custom-control-label" for="lb-form-is_publish">Off will be saved as draft.</label>
+                    </div>
                 </div>
             </div>
             <div class="card-footer">

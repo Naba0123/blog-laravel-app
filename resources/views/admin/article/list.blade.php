@@ -13,6 +13,7 @@
                     <th>Title</th>
                     <th>Category</th>
                     <th>Body</th>
+                    <th>Is Publish</th>
                     <th>Created At</th>
                     <th>Updated At</th>
                     <th>Operation</th>
@@ -25,6 +26,7 @@
                         <td>{{ $article->title }}</td>
                         <td>{{ $article->categories->pluck('name')->join(', ') }}</td>
                         <td>{{ omit_markdown_str($article->body) }}</td>
+                        <td>{{ $article->is_publish ? 'true' : 'false' }}</td>
                         <td>{{ $article->created_at }}</td>
                         <td>{{ $article->updated_at }}</td>
                         <td>

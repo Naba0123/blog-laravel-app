@@ -28,5 +28,5 @@
 </div>
 
 <div class="lb-copyright">
-    <p>(c) {{ date('Y') }} pia-log.com</p>
+    <p>(c) {{ date('Y') }} {{ setting('blog_title') }}</p>
 </div>

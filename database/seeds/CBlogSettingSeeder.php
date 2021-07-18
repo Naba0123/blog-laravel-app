@@ -16,7 +16,7 @@ class CBlogSettingSeeder extends Seeder
         $inserts = array_map(function($settingKey) use ($now) {
             return [
                 'key' => $settingKey,
-                'value' => config('blog.common.default_values.' . $settingKey, ''),
+                'value' => config('blog.setting.default_values.' . $settingKey, ''),
                 'created_at' => $now,
                 'updated_at' => $now,
             ];

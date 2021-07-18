@@ -15,11 +15,16 @@ class ArticleService extends AbstractService
     /**
      * すべての記事を取得
      *
+     * @param bool $includeDraft
      * @return Collection
      */
-    public function getArticles(): Collection
+    public function getArticles(bool $includeDraft = false): Collection
     {
-        return UArticle::gets();
+        $articles = UArticle::gets();
+        if (!$includeDraft) {
+            $articles = $articles->where('is_publish', true);
+        }
+        return $articles;
     }
 
     /**
@@ -62,14 +67,15 @@ class ArticleService extends AbstractService
      * @param string $title
      * @param array $categoryIds
      * @param string $body
+     * @param bool $isPublish
      * @return UArticle
      */
-    public function saveArticle(int $articleId, string $title, array $categoryIds, string $body): UArticle
+    public function saveArticle(int $articleId, string $title, array $categoryIds, string $body, bool $isPublish): UArticle
     {
         // 記事保存
         /** @var UArticle $article */
         $article =  UArticle::findOrNew($articleId);
-        $article->fill(['title' => $title, 'body' => $body])->save();
+        $article->fill(['title' => $title, 'body' => $body, 'is_publish' => $isPublish])->save();
 
         // カテゴリー紐付け保存
         $this->saveCategoryAssociatedArticle($article->id, $categoryIds);

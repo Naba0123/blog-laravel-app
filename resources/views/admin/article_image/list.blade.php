@@ -12,8 +12,8 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="custom-file">
-                            <input name="file" type="file" class="custom-file-input" id="formImageUpload">
-                            <label class="custom-file-label" for="formImageUpload">Choose file</label>
+                            <input name="file" type="file" class="custom-file-input" id="lb-form-file">
+                            <label class="custom-file-label" for="lb-form-file">Choose file</label>
                         </div>
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">Upload</button>

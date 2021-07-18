@@ -22,7 +22,7 @@ class ArticleController extends AdminAbstractController
      */
     public function list(Request $request): View
     {
-        $articles = app(ArticleService::class)->getArticles();
+        $articles = app(ArticleService::class)->getArticles(true);
 
         return view('admin.article.list', [
             'articles' => $articles,
@@ -70,6 +70,7 @@ class ArticleController extends AdminAbstractController
             'title' => 'required|string',
             'category_ids' => 'array',
             'body' => 'required|string',
+            'is_publish' => 'in:on',
         ]);
 
         try {
@@ -79,6 +80,7 @@ class ArticleController extends AdminAbstractController
                     $request->title,
                     $request->category_ids ?: [],
                     $request->body,
+                    $request->is_publish === 'on',
                 );
             });
         } catch (\Throwable $throwable) {
