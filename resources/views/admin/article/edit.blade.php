@@ -17,6 +17,10 @@
                     <input type="text" name="title" value="{{ old('title') ?: $article->title }}" class="form-control" id="lb-form-title" placeholder="Enter Title" required>
                 </div>
                 <div class="form-group">
+                    <label for="lb-form-description">Description</label>
+                    <input type="text" name="description" value="{{ old('description') ?: $article->description }}" class="form-control" id="lb-form-description" placeholder="Enter Description" required>
+                </div>
+                <div class="form-group">
                     <label for="lb-form-category">Category</label>
                     <select multiple="" class="form-control" name="category_ids[]" id="lb-form-category">
                         @foreach ($categories as $category)

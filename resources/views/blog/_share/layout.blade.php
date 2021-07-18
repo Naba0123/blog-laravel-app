@@ -14,6 +14,8 @@
 
     @yield('content-css')
 
+    @include('blog._share.seo')
+
     @include('blog._share.gtag', ['gTagId' => config('blog.analytics.gtag_id')])
 </head>
 <body class="lb-bg-wasurenagusa-gunjyo">

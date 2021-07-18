@@ -11,6 +11,7 @@
                 <tr>
                     <th>Article ID</th>
                     <th>Title</th>
+                    <th>Description</th>
                     <th>Category</th>
                     <th>Body</th>
                     <th>Is Publish</th>
@@ -24,6 +25,7 @@
                     <tr>
                         <td>{{ $article->id }}</td>
                         <td>{{ $article->title }}</td>
+                        <td>{{ $article->description }}</td>
                         <td>{{ $article->categories->pluck('name')->join(', ') }}</td>
                         <td>{{ omit_markdown_str($article->body) }}</td>
                         <td>{{ $article->is_publish ? 'true' : 'false' }}</td>

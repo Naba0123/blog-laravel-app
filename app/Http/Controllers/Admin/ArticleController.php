@@ -68,6 +68,7 @@ class ArticleController extends AdminAbstractController
         $this->validate($request, [
             'article_id' => 'required|' . ($request->article_id > 0 ? 'exists:u_articles,id' : ''),
             'title' => 'required|string',
+            'description' => 'required|string',
             'category_ids' => 'array',
             'body' => 'required|string',
             'is_publish' => 'in:on',
@@ -78,6 +79,7 @@ class ArticleController extends AdminAbstractController
                 app(ArticleService::class)->saveArticle(
                     $request->article_id,
                     $request->title,
+                    $request->description,
                     $request->category_ids ?: [],
                     $request->body,
                     $request->is_publish === 'on',

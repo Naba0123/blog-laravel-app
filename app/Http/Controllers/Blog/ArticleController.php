@@ -33,6 +33,7 @@ class ArticleController extends BlogAbstractController
         $bodyHtml = markdown_to_html($article->body);
 
         return view('blog.article.detail', [
+            '_description' => $article->description,
             'article' => $article,
             'prevLink' => $this->formatNavigationLink($previousArticle),
             'nextLink' => $this->formatNavigationLink($nextArticle),

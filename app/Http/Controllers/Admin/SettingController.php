@@ -34,13 +34,17 @@ class SettingController extends AdminAbstractController
      */
     public function saveGeneral(Request $request): RedirectResponse
     {
-        $config = config('blog.setting');
-        $this->validate($request, [
-            CBlogSetting::KEY_BLOG_TITLE => 'required|string|between:1,' . ($config['max_blog_title_length'] ?? ''),
-            CBlogSetting::KEY_BLOG_DESCRIPTION => 'required|string|between:1,' . ($config['max_blog_description_length'] ?? ''),
-            CBlogSetting::KEY_AUTHOR_NAME => 'required|string|between:1,' . ($config['max_author_name_length'] ?? ''),
-            CBlogSetting::KEY_AUTHOR_DESCRIPTION => 'required|string|between:1,' . ($config['max_author_description_length'] ?? ''),
-        ]);
+        $rules = [];
+        foreach (CBlogSetting::ENABLE_SETTING_KEYS as $key) {
+            $_rule = 'required|string|';
+            if ($length = config('blog.setting.max_length.' . $key)) {
+                $_rule .= 'between:1,' . $length;
+            } else {
+                $_rule .= 'min:1';
+            }
+            $rules[$key] = $_rule;
+        }
+        $this->validate($request, $rules);
 
         try {
             DB::transaction(function () use ($request) {

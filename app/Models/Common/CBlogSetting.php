@@ -12,6 +12,8 @@ class CBlogSetting extends AbstractModel
     const KEY_BLOG_DESCRIPTION = 'blog_description';
     const KEY_AUTHOR_NAME = 'author_name';
     const KEY_AUTHOR_DESCRIPTION = 'author_description';
+    const KEY_TWITTER_SITE_SCREEN_NAME = 'twitter_site_screen_name';
+    const KEY_TWITTER_CREATOR_SCREEN_NAME = 'twitter_creator_screen_name';
 
     /**
      * 有効な設定キー
@@ -21,5 +23,7 @@ class CBlogSetting extends AbstractModel
         self::KEY_BLOG_DESCRIPTION,
         self::KEY_AUTHOR_NAME,
         self::KEY_AUTHOR_DESCRIPTION,
+        self::KEY_TWITTER_SITE_SCREEN_NAME,
+        self::KEY_TWITTER_CREATOR_SCREEN_NAME,
     ];
 }
