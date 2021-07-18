@@ -37,11 +37,12 @@ class ArticleImageController extends AdminAbstractController
     public function upload(Request $request): RedirectResponse
     {
         $this->validate($request, [
+            'filename' => 'string|min:1',
             'file' => 'required|file',
         ]);
 
         try {
-            app(ArticleImageService::class)->saveImage($request->file('file'));
+            app(ArticleImageService::class)->saveImage($request->filename, $request->file('file'));
         } catch (\Throwable $throwable) {
             \Log::error($throwable);
             return back()->withInput()->withCustomError(error_messages($throwable));

@@ -40,12 +40,16 @@
                 </thead>
                 <tbody>
                 @foreach ($images as $image)
-                    @php /** @var \Symfony\Component\Finder\SplFileInfo $image */ @endphp
+                    @php
+                        /** @var \Symfony\Component\Finder\SplFileInfo $image */
+                        $dataForJson = ['name' => $image->getFilename(), 'url' => image_url($image)];
+                    @endphp
                     <tr>
                         <td>{{ $image->getFilename() }}</td>
-                        <td><img src="{{ image_url($image) }}" height="200"></td>
+                        <td><img src="{{ image_url($image) }}" height="200" alt=""></td>
                         <td>{{ number_format(ceil($image->getSize() / 1024)) }} KB</td>
                         <td>
+                            <button type="button" class="btn btn-primary lb-open-update-modal" data-image='@json($dataForJson)'>Update</button>
                             <form action="{{ route('admin.article_image.delete') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="filename" value="{{ $image->getFilename() }}" />
@@ -59,25 +63,58 @@
         </div>
     </div>
 
+    <div class="modal fade" id="lb-modal-save" aria-modal="true" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ route('admin.article_image.upload') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="filename"/>
+                    <div class="modal-header">
+                        <h4 class="modal-title"><span class="lb-modal-new"></span><span class="lb-modal-edit"></span> Update Image</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="callout callout-warning">
+                            <h5>Old Image</h5>
+                            <img id="lb-modal-old-img" class="img-fluid" alt="" src="">
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input name="file" type="file" class="custom-file-input" id="lb-form-file">
+                                    <label class="custom-file-label" for="lb-form-file">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('content-script')
     <script>
         const lbScript = {
-            openEditModal: function(category) {
+            openEditModal: function(image) {
                 let $target = $('#lb-modal-save');
-                let $categoryId = $target.find('input[name=category_id]');
-                const id = category.id || 0;
-                $categoryId.val(id);
-                $target.find('input[name=name]').val(category.name || '');
+                $("#lb-modal-old-img").attr('src', image.url);
+                $target.find("input[name=filename]").val(image.name);
                 $target.modal();
             },
         };
 
         $(function() {
             $('#lb-table').dataTable();
-            $('.lb-open-edit-modal').click(function() {
-                lbScript.openEditModal($(this).data('category'));
+            $('.lb-open-update-modal').click(function() {
+                lbScript.openEditModal($(this).data('image'));
             });
         });
     </script>
