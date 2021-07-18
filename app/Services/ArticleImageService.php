@@ -19,9 +19,23 @@ class ArticleImageService extends AbstractService
         return \File::files($path);
     }
 
+    /**
+     * 画像保存
+     *
+     * @param UploadedFile $file
+     */
     public function saveImage(UploadedFile $file)
     {
-        $path = 'public/article_image';
-        $file->store($path);
+        \Storage::disk('article_image')->putFile('', $file);
+    }
+
+    /**
+     * 画像削除
+     *
+     * @param string $filename
+     */
+    public function deleteImage(string $filename)
+    {
+        \Storage::disk('article_image')->delete($filename);
     }
 }

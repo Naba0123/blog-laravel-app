@@ -46,7 +46,11 @@
                         <td><img src="{{ image_url($image) }}" height="200"></td>
                         <td>{{ number_format(ceil($image->getSize() / 1024)) }} KB</td>
                         <td>
-
+                            <form action="{{ route('admin.article_image.delete') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="filename" value="{{ $image->getFilename() }}" />
+                                <input type="submit" class="btn btn-danger" value="Delete" />
+                            </form>
                         </td>
                     </tr>
                 @endforeach
