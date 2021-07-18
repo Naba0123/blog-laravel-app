@@ -25,7 +25,7 @@ if (!function_exists('markdown_to_html')) {
      */
     function markdown_to_html(string $body): string
     {
-        return \Illuminate\Mail\Markdown::parse($body)->toHtml();
+        return \App\Support\Markdown::parse($body)->toHtml();
     }
 }
 

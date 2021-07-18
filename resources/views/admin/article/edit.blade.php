@@ -25,8 +25,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Body Markdown</label>
-                    <textarea name="body" class="form-control" rows="10" placeholder="Enter Body" required>{!! old('body') ?: $article->body !!}</textarea>
+                    <label for="lb-form-body">Body Markdown</label>
+                    <textarea id="lb-form-body" name="body" class="form-control" rows="10" placeholder="Enter Body" required>{!! old('body') ?: $article->body !!}</textarea>
                 </div>
                 <div class="form-group">
                     <label>Is Publish</label>

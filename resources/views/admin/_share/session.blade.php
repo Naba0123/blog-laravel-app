@@ -10,6 +10,20 @@
     </script>
 @endif
 
+@if($errors->any())
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            @foreach ($errors->all() as $error)
+            $(document).Toasts('create', {
+                class: 'bg-danger',
+                title: 'Error',
+                body: '{{ $error }}'
+            })
+            @endforeach
+        });
+    </script>
+@endif
+
 @if ($errors = session('custom_errors'))
     <script>
         document.addEventListener("DOMContentLoaded", function(){
