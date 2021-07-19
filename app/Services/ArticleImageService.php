@@ -16,6 +16,9 @@ class ArticleImageService extends AbstractService
     public function getAllImages(): array
     {
         $path = storage_path('app/public/article_image');
+        if (!\File::exists($path)) {
+            \File::makeDirectory($path);
+        }
         return \File::files($path);
     }
 

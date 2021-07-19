@@ -14,6 +14,7 @@
         "fideloper/proxy": "^4.4",
         "laravel/framework": "^6.20.26",
         "laravel/tinker": "^2.5",
+        "naba0123/commonmark-ext-img-url-prefix": "^0.3.0",
         "zoon/commonmark-ext-youtube-iframe": "^1.1"
     },
     "require-dev": {
