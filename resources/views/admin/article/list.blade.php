@@ -32,6 +32,9 @@
                         <td>{{ $article->created_at }}</td>
                         <td>{{ $article->updated_at }}</td>
                         <td>
+                            <a href="{{ route('blog.article.detail', ['article_id' => $article->id]) }}" target="_blank">
+                                <button type="button" class="btn btn-info btn-sm">{{ $article->is_publish ? 'View' : 'Preview' }}</button>
+                            </a>
                             <a href="{{ route('admin.article.edit', ['article_id' => $article->id]) }}">
                                 <button type="button" class="btn btn-primary btn-sm">Edit</button>
                             </a>

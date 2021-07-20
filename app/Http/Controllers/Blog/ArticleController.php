@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Blog;
 
 
+use App\Exceptions\CriticalException;
 use App\Http\ViewTrait\ArticleTrait;
 use App\Services\ArticleService;
 use Illuminate\Http\Request;
@@ -22,11 +23,21 @@ class ArticleController extends BlogAbstractController
         return view('blog.article.list');
     }
 
+    /**
+     * @param Request $request
+     * @param int $article_id
+     * @return View
+     * @throws CriticalException
+     */
     public function detail(Request $request, int $article_id): View
     {
         $articleService = app(ArticleService::class);
 
         $article = $articleService->getArticle($article_id);
+        if (!$articleService->canViewArticle($article, \Auth::user())) {
+            throw new CriticalException('cannot view this article');
+        }
+
         $previousArticle = $articleService->getPreviousArticle($article_id);
         $nextArticle = $articleService->getNextArticle($article_id);
 

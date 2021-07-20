@@ -25,6 +25,7 @@ class ArticleImageService extends AbstractService
     /**
      * 画像保存
      *
+     * @param string|null $filename
      * @param UploadedFile $file
      */
     public function saveImage(?string $filename, UploadedFile $file)

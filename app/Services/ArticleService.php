@@ -4,10 +4,10 @@
 namespace App\Services;
 
 
-use App\Exceptions\CriticalException;
 use App\Models\Common\CCategory;
 use App\Models\User\UArticle;
 use App\Models\User\UCategoryAssociatedArticle;
+use App\User;
 use Illuminate\Database\Eloquent\Collection;
 
 class ArticleService extends AbstractService
@@ -46,7 +46,7 @@ class ArticleService extends AbstractService
      */
     public function getPreviousArticle(int $currentArticleId): ?UArticle
     {
-        return UArticle::gets()->where('id', '<', $currentArticleId)->sortKeysDesc()->first();
+        return $this->getArticles()->where('id', '<', $currentArticleId)->sortKeysDesc()->first();
     }
 
     /**
@@ -57,7 +57,7 @@ class ArticleService extends AbstractService
      */
     public function getNextArticle(int $currentArticleId): ?UArticle
     {
-        return UArticle::gets()->where('id', '>', $currentArticleId)->sortKeys()->first();
+        return $this->getArticles()->where('id', '>', $currentArticleId)->sortKeys()->first();
     }
 
     /**
@@ -102,11 +102,27 @@ class ArticleService extends AbstractService
     }
 
     /**
+     * 対象のユーザーが記事を読むことができるかどうかのチェック
+     *
+     * @param UArticle $article
+     * @param User|null $user
+     * @return bool
+     */
+    public function canViewArticle(UArticle $article, ?User $user): bool
+    {
+        if ($article->is_publish) {
+            return true;
+        }
+        // 今はログインしていればプレビューが可能
+        return !is_null($user);
+    }
+
+    /**
      * すべてのカテゴリーを取得
      *
-     * @return mixed
+     * @return Collection
      */
-    public function getCategories()
+    public function getCategories(): Collection
     {
         return CCategory::gets();
     }
