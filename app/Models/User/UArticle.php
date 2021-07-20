@@ -18,8 +18,15 @@ class UArticle extends AbstractModel
      */
     public function getCategoriesAttribute(): Collection
     {
-        $categoryIds = UCategoryAssociatedArticle::gets()->where('u_article_id', $this->id)->pluck('c_category_id')->all();
-        return CCategory::gets()->whereIn('id', $categoryIds);
+        return CCategory::gets()->whereIn('id', $this->associated_category_ids);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAssociatedCategoryIdsAttribute(): array
+    {
+        return UCategoryAssociatedArticle::gets()->where('u_article_id', $this->id)->pluck('c_category_id')->all();
     }
 
 }

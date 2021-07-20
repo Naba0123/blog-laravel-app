@@ -10,12 +10,18 @@ body {
 }
 
 header {
+    color: $textLightColor;
     text-align: center;
-    margin-bottom: 3em;
     padding: 3em;
     h1 {
         margin: 0;
         font-weight: bold;
+    }
+    a {
+        color: $textLightColor;
+        &:hover {
+            color: $textLightColor;
+        }
     }
 }
 
@@ -28,8 +34,6 @@ a {
 }
 
 footer {
-    margin-top: 3em;
-    margin-bottom: 2rem;
     padding: 1em;
     p {
         margin: 0;

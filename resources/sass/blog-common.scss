@@ -8,6 +8,10 @@
     background-image: $bgPattern, linear-gradient(#7DB9DE, #51A8DD);
 }
 
+.lb-bg-kachi-kurotsurubami {
+    background-image: linear-gradient(#08192D, #0B1013);
+}
+
 .lb-bg-lightgray {
     background-color: lightgray;
     background-image: $bgPattern;
@@ -19,6 +23,15 @@
 }
 
 
-.lb-box-shadow {
-    box-shadow: 0 0 0.5rem gray;
+.lb-box-shadow-gray {
+    box-shadow: 0 0 0.3rem gray;
+}
+
+.lb-box-shadow-lightgray {
+    box-shadow: 0 0 0.4rem lightgray;
+}
+
+
+.card {
+    border: none;
 }

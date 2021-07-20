@@ -20,7 +20,7 @@
 </head>
 <body class="lb-bg-wasurenagusa-gunjyo">
 
-<header class="lb-bg-gofun lb-box-shadow">
+<header class="lb-bg-kachi-kurotsurubami lb-box-shadow-gray">
     <div class="container">
         <h1><a href="{{ url('/') }}">{{ setting('blog_title') }}</a></h1>
         <p class="lb-header-description">{{ setting('blog_description') }}</p>
@@ -31,7 +31,7 @@
     @yield('content')
 </div>
 
-<footer class="lb-bg-gofun lb-box-shadow">
+<footer class="lb-bg-gofun lb-box-shadow-lightgray">
     <div class="container">
         @include('blog._share.footer')
     </div>

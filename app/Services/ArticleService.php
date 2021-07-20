@@ -104,12 +104,14 @@ class ArticleService extends AbstractService
     /**
      * 対象のユーザーが記事を読むことができるかどうかのチェック
      *
-     * @param UArticle $article
+     * @param int $articleId
      * @param User|null $user
      * @return bool
      */
-    public function canViewArticle(UArticle $article, ?User $user): bool
+    public function canViewArticle(int $articleId, ?User $user): bool
     {
+        $article = $this->getArticle($articleId);
+
         if ($article->is_publish) {
             return true;
         }
@@ -185,6 +187,28 @@ class ArticleService extends AbstractService
             }, $categoryIds);
             UCategoryAssociatedArticle::insert($inserts);
         }
+    }
+
+    /**
+     * @param int $articleId
+     * @return Collection
+     */
+    public function getRelatedArticles(int $articleId): Collection
+    {
+        $article = $this->getArticle($articleId);
+        $categoryIds = $article->associated_category_ids;
+
+        $articleIds = UCategoryAssociatedArticle::whereIn('c_category_id', $categoryIds)
+            ->where('u_article_id', '!=', $articleId)->pluck('u_article_id')->all();
+
+        $articles = $this->getArticles()->whereIn('id', $articleIds);
+
+        $randomRelatedNum = config('blog.article.related_article_num');
+        if ($articles->count() > $randomRelatedNum) {
+            dd($randomRelatedNum);
+            return $articles->random($randomRelatedNum);
+        }
+        return $articles;
     }
 
 }

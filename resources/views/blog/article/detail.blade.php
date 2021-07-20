@@ -16,10 +16,10 @@
             {!! $bodyHtml !!}
         </div>
 
-        <hr/>
+        <hr class="mb-4 mt-4"/>
 
         <div class="lb-article-footer">
-            footer
+            @include('blog._parts.related_articles', ['articles' => $relatedArticles])
         </div>
     </div>
 @endsection

@@ -34,7 +34,7 @@ class ArticleController extends BlogAbstractController
         $articleService = app(ArticleService::class);
 
         $article = $articleService->getArticle($article_id);
-        if (!$articleService->canViewArticle($article, \Auth::user())) {
+        if (!$articleService->canViewArticle($article_id, \Auth::user())) {
             throw new CriticalException('cannot view this article');
         }
 
@@ -43,12 +43,15 @@ class ArticleController extends BlogAbstractController
 
         $bodyHtml = markdown_to_html($article->body);
 
+        $relatedArticles = $articleService->getRelatedArticles($article_id);
+
         return view('blog.article.detail', [
             '_description' => $article->description,
             'article' => $article,
             'prevLink' => $this->formatNavigationLink($previousArticle),
             'nextLink' => $this->formatNavigationLink($nextArticle),
             'bodyHtml' => $bodyHtml,
+            'relatedArticles' => $relatedArticles,
         ]);
     }
 }
