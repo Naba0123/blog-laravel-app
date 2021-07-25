@@ -77,12 +77,8 @@ class ArticleController extends AdminAbstractController
         try {
             \DB::transaction(function() use ($request) {
                 app(ArticleService::class)->saveArticle(
-                    $request->article_id,
-                    $request->title,
-                    $request->description,
+                    $request->all(),
                     $request->category_ids ?: [],
-                    $request->body,
-                    $request->is_publish === 'on',
                 );
             });
         } catch (\Throwable $throwable) {

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class AbstractModel extends Model
 {
     /** @var string[] @inheritdoc  */
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $guarded = ['id'];
 
     /** @var array 一時キャッシュ */
     private static array $_cacheData = [];

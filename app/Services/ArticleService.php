@@ -63,25 +63,19 @@ class ArticleService extends AbstractService
     /**
      * 記事を保存する
      *
-     * @param int $articleId
-     * @param string $title
-     * @param string $description
+     * @param array $params
      * @param array $categoryIds
-     * @param string $body
-     * @param bool $isPublish
      * @return UArticle
      */
-    public function saveArticle(int $articleId, string $title, string $description, array $categoryIds, string $body, bool $isPublish): UArticle
+    public function saveArticle(array $params, array $categoryIds): UArticle
     {
         // 記事保存
         /** @var UArticle $article */
-        $article =  UArticle::findOrNew($articleId);
-        $article->fill([
-            'title' => $title,
-            'description' => $description,
-            'body' => $body,
-            'is_publish' => $isPublish
-        ])->save();
+        $article =  UArticle::findOrNew($params['article_id']);
+
+        $params['is_publish'] = $params['is_publish'] === 'on';
+
+        $article->fill($params)->save();
 
         // カテゴリー紐付け保存
         $this->saveCategoryAssociatedArticle($article->id, $categoryIds);
