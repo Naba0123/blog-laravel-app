@@ -3,6 +3,6 @@
         @include('blog._parts.category_list', ['categories' => $article->categories])
     </div>
     <div class="lb-article-created">
-        <p><i class="fa fa-calendar"></i> {{ $article->created_at }}</p>
+        <p><i class="fa fa-calendar"></i> {{ $article->created_at->format('Y-m-d H:i') }}</p>
     </div>
 </div>

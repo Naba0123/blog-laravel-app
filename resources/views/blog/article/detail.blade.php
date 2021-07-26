@@ -12,6 +12,12 @@
 
         <hr/>
 
+        @if ($article->created_at->timestamp != $article->updated_at->timestamp)
+            <div class="lb-article-updated_at">
+                <p>Last Updated at {{ $article->updated_at->format('Y-m-d H:i') }}</p>
+            </div>
+        @endif
+
         <div class="lb-article-body">
             {!! $bodyHtml !!}
         </div>

@@ -171,6 +171,8 @@ class ArticleService extends AbstractService
     }
 
     /**
+     * 記事に紐付けるカテゴリー情報を保存
+     *
      * @param int $articleId
      * @param array $categoryIds
      */
@@ -192,6 +194,8 @@ class ArticleService extends AbstractService
     }
 
     /**
+     * 関連記事を取得
+     *
      * @param int $articleId
      * @return Collection
      */
@@ -207,7 +211,6 @@ class ArticleService extends AbstractService
 
         $randomRelatedNum = config('blog.article.related_article_num');
         if ($articles->count() > $randomRelatedNum) {
-            dd($randomRelatedNum);
             return $articles->random($randomRelatedNum);
         }
         return $articles;

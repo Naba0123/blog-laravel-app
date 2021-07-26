@@ -36,7 +36,7 @@
                     <label>Is Publish</label>
                     <div class="custom-control custom-switch custom-switch-on-success">
                         <input name="is_publish" type="checkbox" class="custom-control-input" id="lb-form-is_publish" {{ $article->is_publish ? 'checked' : '' }}>
-                        <label class="custom-control-label" for="lb-form-is_publish">Off will be saved as draft.</label>
+                        <label class="custom-control-label" for="lb-form-is_publish">Enable is public article.</label>
                     </div>
                 </div>
                 <div class="form-group">
