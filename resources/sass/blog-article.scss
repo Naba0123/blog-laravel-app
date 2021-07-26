@@ -53,6 +53,15 @@ p.lb-header-description {
     }
 }
 
+.lb-article-updated_at {
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    color: $textLightColor;
+    p {
+        margin: 0;
+    }
+}
+
 .lb-article-body {
     margin: 2rem 0 4rem;
 
