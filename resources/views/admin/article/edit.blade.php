@@ -39,17 +39,56 @@
                         <label class="custom-control-label" for="lb-form-is_publish">Off will be saved as draft.</label>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="lb-form-created_at">Created At</label>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input lb-form-switch" id="lb-form-switch-created_at" data-target="created_at">
+                        <label class="custom-control-label" for="lb-form-switch-created_at">Enable self setting of created at.</label>
+                    </div>
+                    <input type="datetime-local" name="created_at" value="{{ old('created_at') ?: ($article->created_at ? $article->created_at->format('Y-m-d\TH:i') : '') }}" class="form-control" id="lb-form-created_at" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="lb-form-updated_at">Updated At</label>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input lb-form-switch" id="lb-form-switch-updated_at" data-target="updated_at">
+                        <label class="custom-control-label" for="lb-form-switch-updated_at">Enable self setting of updated at. (default is saved time)</label>
+                    </div>
+                    <input type="datetime-local" name="updated_at" value="{{ old('updated_at') ?: ($article->updated_at ? $article->updated_at->format('Y-m-d\TH:i') : '') }}" class="form-control" id="lb-form-updated_at" disabled>
+                </div>
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-success">Save</button>
             </div>
         </div>
     </form>
+
     @include('admin._parts.back')
 @endsection
 
 @section('content-script')
     <script>
+        $(function() {
+            $('.lb-form-switch').change(function() {
+                const target = $(this).data('target');
+                if (!target) {
+                    return;
+                }
+                const isDisabled = !$(this).prop('checked');
+                lb.switchForm(target, isDisabled);
+            });
 
+            @foreach (['created_at', 'updated_at'] as $target)
+                @if (old($target) !== null)
+                    $('input[data-target={{ $target }}]').prop('checked', true);
+                    lb.switchForm('{{ $target }}', false);
+                @endif
+            @endforeach
+        });
+
+        let lb = {
+            switchForm: function(target, isDisabled) {
+                $('input[name=' + target + ']').prop('disabled', isDisabled);
+            },
+        };
     </script>
 @endsection

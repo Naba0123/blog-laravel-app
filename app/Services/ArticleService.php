@@ -8,6 +8,7 @@ use App\Models\Common\CCategory;
 use App\Models\User\UArticle;
 use App\Models\User\UCategoryAssociatedArticle;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class ArticleService extends AbstractService
@@ -73,7 +74,14 @@ class ArticleService extends AbstractService
         /** @var UArticle $article */
         $article =  UArticle::findOrNew($params['article_id']);
 
-        $params['is_publish'] = $params['is_publish'] === 'on';
+        $params['is_publish'] = (($params['is_publish'] ?? null) === 'on');
+        if (array_key_exists('created_at', $params)) {
+            $params['created_at'] = new Carbon($params['created_at']);
+        }
+        if (array_key_exists('updated_at', $params)) {
+            $params['updated_at'] = new Carbon($params['updated_at']);
+        }
+
 
         $article->fill($params)->save();
 
