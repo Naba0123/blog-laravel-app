@@ -20,7 +20,7 @@
 </head>
 <body class="lb-bg-wasurenagusa-gunjyo">
 
-<header class="lb-bg-kachi-kurotsurubami lb-box-shadow-gray">
+<header class="lb-bg-kachi-kurotsurubami lb-box-shadow-gray" style="@if($headerImage = header_image_url()) background-image: url({{ $headerImage }}); background-size:100%; background-position: center @endif">
     <div class="container">
         <h1><a href="{{ url('/') }}">{{ setting('blog_title') }}</a></h1>
         <p class="lb-header-description">{{ setting('blog_description') }}</p>

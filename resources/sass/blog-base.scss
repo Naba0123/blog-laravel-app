@@ -16,6 +16,11 @@ header {
     h1 {
         margin: 0;
         font-weight: bold;
+        text-shadow: 0 0 0.4rem dimgray;
+    }
+    p {
+        margin: 0;
+        text-shadow: 0 0 0.2rem dimgray;
     }
     a {
         color: $textLightColor;

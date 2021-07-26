@@ -76,3 +76,20 @@ if (!function_exists('image_url')) {
     }
 }
 
+if (!function_exists('header_image_url')) {
+    /**
+     * ヘッダー画像のURL取得
+     * 画像がなければ空文字が返る
+     *
+     * @return string
+     */
+    function header_image_url(): string
+    {
+        $filename = config('blog.design.header_image_filename');
+        if (\Storage::disk('public')->exists($filename)) {
+            return \Storage::disk('public')->url($filename);
+        }
+        return '';
+    }
+}
+

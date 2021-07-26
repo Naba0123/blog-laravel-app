@@ -57,4 +57,45 @@ class SettingController extends AdminAbstractController
 
         return redirect()->route('admin.setting.general')->withSuccess('Saved General Setting.');
     }
+
+    /**
+     * View Design Setting
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function design(Request $request): View
+    {
+        return view('admin.setting.design');
+    }
+
+    /**
+     * Save Design Setting
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
+     * @throws Throwable
+     */
+    public function saveDesign(Request $request): RedirectResponse
+    {
+        $this->validate($request, [
+            'header_image' => ['file'],
+        ]);
+
+        try {
+            DB::transaction(function () use ($request) {
+                $settingService = app(SettingService::class);
+
+                if ($headerImage = $request->file('header_image')) {
+                    $settingService->saveHeaderImage($headerImage);
+                }
+            });
+        } catch (Throwable $throwable) {
+            \Log::error($throwable);
+            return back()->withInput()->withCustomErrors(error_messages($throwable));
+        }
+
+        return redirect()->route('admin.setting.design')->withSuccess('Saved Design Setting.');
+    }
 }

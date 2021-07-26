@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Common\CBlogSetting;
+use Illuminate\Http\UploadedFile;
 
 class SettingService extends AbstractService
 {
@@ -39,5 +40,13 @@ class SettingService extends AbstractService
             $cBlogSetting->value = $settingValue;
             $cBlogSetting->save();
         }
+    }
+
+    /**
+     * @param UploadedFile $headerFile
+     */
+    public function saveHeaderImage(UploadedFile $headerFile)
+    {
+        \Storage::disk('public')->putFileAs('', $headerFile, config('blog.design.header_image_filename'));
     }
 }

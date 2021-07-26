@@ -56,6 +56,11 @@ return [
                 ],
                 [
                     'icon' => 'far fa-circle',
+                    'text' => 'Design Setting',
+                    'url' => 'admin/setting/design',
+                ],
+                [
+                    'icon' => 'far fa-circle',
                     'text' => 'User Setting',
                     'url' => 'admin/setting/user',
                 ],
