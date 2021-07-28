@@ -6,6 +6,7 @@ use Illuminate\Support\HtmlString;
 use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Environment;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
+use League\CommonMark\Extension\Strikethrough\StrikethroughExtension;
 use League\CommonMark\Extension\Table\TableExtension;
 use Naba0123\CommonMarkExt\ImgUrlPrefix\ImgUrlPrefixExtension;
 use Zoon\CommonMark\Ext\YouTubeIframe\YouTubeIframeExtension;
@@ -23,10 +24,12 @@ class Markdown
     {
         $environment = Environment::createCommonMarkEnvironment();
 
-        $environment->addExtension(new TableExtension());
         $environment->addExtension(new AutolinkExtension());
-        $environment->addExtension(new YouTubeIframeExtension());
+        $environment->addExtension(new StrikethroughExtension());
+        $environment->addExtension(new TableExtension());
+
         $environment->addExtension(new ImgUrlPrefixExtension());
+        $environment->addExtension(new YouTubeIframeExtension());
 
 
         $converter = new CommonMarkConverter([

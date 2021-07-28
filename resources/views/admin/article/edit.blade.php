@@ -62,7 +62,6 @@
         </div>
     </form>
 
-    @include('admin._parts.back')
 @endsection
 
 @section('content-script')

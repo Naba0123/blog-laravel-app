@@ -52,7 +52,7 @@
 .lb-article-updated_at {
     padding: 0.5rem;
     border-radius: 0.3rem;
-    color: $textLightColor;
+    border: 2px dashed $mainColor;
     p {
         margin: 0;
     }
@@ -61,11 +61,88 @@
 .lb-article-body {
     margin: 2rem 0 4rem;
 
+    // 本文 Markdown
+    a {
+        color: $textLinkColor;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    blockquote {
+        padding-left: 0.7rem;
+        border-left: 0.3rem solid lightgray;
+    }
+
+    h1 {
+        text-align: center;
+        text-shadow: 0 0 0.5rem lightgray;
+        border-bottom: 3px solid $mainColor;
+        padding-bottom: 0.2rem;
+        margin-bottom: 2rem;
+        font-weight: bold;
+    }
+
+    h2 {
+        background-color: $mainColor;
+        background-image: $bgPattern;
+        padding: 0.4rem;
+        color: $textLightColor;
+        border-radius: 0.2rem;
+        box-shadow: 0.3rem 0.3rem 0.2rem lightgray;
+        margin-bottom: 1.5rem;
+    }
+
+    h3 {
+        color: $mainColor;
+        padding: 0.3rem;
+        margin-bottom: 1.3rem;
+        border-left: 6px double $mainColor;
+        border-bottom: 4px solid $mainColor;
+    }
+
+    h4 {
+        color: $mainColor;
+        padding: 0.2rem;
+        border-bottom: 2px dashed $mainColor;
+        margin-bottom: 1.0rem;
+    }
+
+    h5 {
+        color: $mainColor;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    h6 {
+        color: $mainColor;
+        font-weight: bold;
+    }
+
+    hr {
+        margin: 3rem 0;
+    }
+
     img {
         width: auto;
         max-width: 100%;
         box-shadow: 0 0 0.5rem lightgray;
         margin: 1rem 0;
+    }
+
+    pre {
+        padding: 1rem;
+        background-color: #0F2540;
+        color: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 0.3rem gray;
+    }
+
+    table {
+        th, td {
+            border: solid 1px lightgray;
+            padding: 0.3rem 1rem;
+        }
     }
 }
 

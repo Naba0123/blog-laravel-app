@@ -221,9 +221,7 @@
                             </div><!-- /.col -->
                         @else
                             <div class="col-12">
-                                <a href="{{ back()->getTargetUrl() }}">
-                                    <button type="button" class="btn btn-default">Back</button>
-                                </a>
+                                @include('admin._parts.back')
                             </div>
                         @endif
                     </div><!-- /.row -->
