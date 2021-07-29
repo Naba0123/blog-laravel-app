@@ -19,6 +19,12 @@
         @endif
 
         <div class="lb-article-body">
+            <!-- Summary -->
+            <div class="lb-article-summary">
+                <h2>Summary</h2>
+                <p>{!! $article->description !!}</p>
+            </div>
+
             {!! $bodyHtml !!}
         </div>
 

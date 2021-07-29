@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group">
                     <label for="lb-form-description">Description</label>
-                    <input type="text" name="description" value="{{ old('description') ?: $article->description }}" class="form-control" id="lb-form-description" placeholder="Enter Description" required>
+                    <textarea id="lb-form-description" name="description" class="form-control" rows="3" placeholder="Enter Description" required>{!! old('description') ?: $article->description !!}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="lb-form-category">Category</label>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group">
                     <label for="lb-form-body">Body Markdown</label>
-                    <textarea id="lb-form-body" name="body" class="form-control" rows="10" placeholder="Enter Body" required>{!! old('body') ?: $article->body !!}</textarea>
+                    <textarea id="lb-form-body" name="body" class="form-control" rows="20" placeholder="Enter Body" required>{!! old('body') ?: $article->body !!}</textarea>
                 </div>
                 <div class="form-group">
                     <label>Is Publish</label>
