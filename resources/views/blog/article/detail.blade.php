@@ -8,20 +8,20 @@
             <h1 class="lb-article-title">{{ $article->title }}</h1>
 
             @include('blog._parts.article_info', ['article' => $article])
+
+            @if ($article->created_at->timestamp != $article->updated_at->timestamp)
+                <div class="lb-article-updated_at">
+                    <p>Updated at <i class="fa fa-calendar"></i> {{ $article->updated_at->format('Y-m-d H:i') }}</p>
+                </div>
+            @endif
         </div>
 
         <hr/>
 
-        @if ($article->created_at->timestamp != $article->updated_at->timestamp)
-            <div class="lb-article-updated_at">
-                <p>Last Updated at {{ $article->updated_at->format('Y-m-d H:i') }}</p>
-            </div>
-        @endif
-
         <div class="lb-article-body">
             <!-- Summary -->
             <div class="lb-article-summary">
-                <h2>Summary</h2>
+                <h4><i class="fas fa-comment"></i> Summary</h4>
                 <p>{!! $article->description !!}</p>
             </div>
 

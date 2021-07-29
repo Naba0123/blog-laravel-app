@@ -50,16 +50,33 @@
 }
 
 .lb-article-updated_at {
-    padding: 0.5rem;
-    border-radius: 0.3rem;
-    border: 2px solid $mainColor;
+    display: flex;
+    justify-content: flex-end;
     p {
+        color: $subColor;
         margin: 0;
     }
 }
 
 .lb-article-body {
     margin: 2rem 0 4rem;
+
+    .lb-article-summary {
+        border: 1px solid $mainColor;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        h4 {
+            padding: 0 1rem 0.2rem;
+            border: none;
+            margin: 0;
+            background-color: $mainColor;
+            color: $textLightColor;
+        }
+        p {
+            padding: 0.5rem 1rem;
+            margin-bottom: 0;
+        }
+    }
 
     // 本文 Markdown
     a {
