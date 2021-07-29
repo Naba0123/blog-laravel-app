@@ -18,7 +18,7 @@
 
     @include('blog._share.gtag', ['gTagId' => config('blog.analytics.gtag_id')])
 </head>
-<body class="lb-bg-wasurenagusa-gunjyo">
+<body class="lb-bg-base">
 
 <header class="lb-bg-kachi-kurotsurubami lb-box-shadow-gray" style="@if($headerImage = header_image_url()) background-image: url({{ $headerImage }}); background-size:100%; background-position: center @endif">
     <div class="container">
@@ -31,7 +31,7 @@
     @yield('content')
 </div>
 
-<footer class="lb-bg-gofun lb-box-shadow-lightgray">
+<footer class="lb-bg-gofun lb-box-shadow-gray">
     <div class="container">
         @include('blog._share.footer')
     </div>

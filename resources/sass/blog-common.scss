@@ -1,29 +1,15 @@
 @import "variables";
 
-.lb-bg-mizu-byakugun {
-    background-image: $bgPattern, linear-gradient(#81C7D4, #78C2C4);
-}
-
-.lb-bg-wasurenagusa-gunjyo {
-    background-image: $bgPattern, linear-gradient(#7DB9DE, #51A8DD);
-}
-
 .lb-bg-kachi-kurotsurubami {
     background-image: linear-gradient(#08192D, #0B1013);
 }
 
-.lb-bg-lightgray {
-    background-color: lightgray;
-    background-image: $bgPattern;
-}
-
-.lb-bg-chigusa {
-    background-color: #3A8FB7;
-    background-image: $bgPattern;
-}
-
 .lb-bg-gofun {
     background-color: #FFFFFB;
+    background-image: $bgPattern;
+}
+
+.lb-bg-base {
     background-image: $bgPattern;
 }
 
