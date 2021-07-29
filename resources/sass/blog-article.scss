@@ -79,6 +79,7 @@
         text-shadow: 0 0 0.5rem lightgray;
         border-bottom: 3px solid $mainColor;
         padding-bottom: 0.2rem;
+        margin-top: 5rem;
         margin-bottom: 2rem;
         font-weight: bold;
     }
@@ -90,12 +91,14 @@
         color: $textLightColor;
         border-radius: 0.2rem;
         box-shadow: 0.3rem 0.3rem 0.2rem lightgray;
+        margin-top: 4rem;
         margin-bottom: 1.5rem;
     }
 
     h3 {
         color: $mainColor;
         padding: 0.3rem;
+        margin-top: 3rem;
         margin-bottom: 1.3rem;
         border-left: 6px double $mainColor;
         border-bottom: 4px solid $mainColor;
@@ -105,18 +108,21 @@
         color: $mainColor;
         padding: 0.2rem;
         border-bottom: 2px dashed $mainColor;
+        margin-top: 2rem;
         margin-bottom: 1.0rem;
     }
 
     h5 {
         color: $mainColor;
         font-weight: bold;
+        margin-top: 1rem;
         margin-bottom: 0.5rem;
     }
 
     h6 {
         color: $mainColor;
         font-weight: bold;
+        margin-top: 0.5rem;
     }
 
     hr {
