@@ -11,7 +11,7 @@ class MainController extends BlogAbstractController
 {
     public function index(Request $request)
     {
-        $articles = app(ArticleService::class)->getArticles();
+        $articles = app(ArticleService::class)->getArticles()->sortByDesc('created_at');
 
         return view('blog.main.index', ['articles' => $articles]);
     }
