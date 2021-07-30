@@ -38,8 +38,8 @@ class ArticleController extends BlogAbstractController
             throw new CriticalException('cannot view this article');
         }
 
-        $previousArticle = $articleService->getPreviousArticle($article_id);
-        $nextArticle = $articleService->getNextArticle($article_id);
+        $previousArticle = $articleService->getPreviousArticle($article->created_at);
+        $nextArticle = $articleService->getNextArticle($article->created_at);
 
         $bodyHtml = markdown_to_html($article->body);
 

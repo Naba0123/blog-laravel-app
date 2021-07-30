@@ -42,23 +42,25 @@ class ArticleService extends AbstractService
     /**
      * 特定の記事IDの一つ前の記事を取得
      *
-     * @param int $currentArticleId
+     * @param Carbon $createdAt
      * @return UArticle|null
      */
-    public function getPreviousArticle(int $currentArticleId): ?UArticle
+    public function getPreviousArticle(Carbon $createdAt): ?UArticle
     {
-        return $this->getArticles()->where('id', '<', $currentArticleId)->sortKeysDesc()->first();
+        return $this->getArticles()->where('created_at', '>', $createdAt->toDateTimeString())
+            ->sortBy('created_at')->first();
     }
 
     /**
      * 特定の記事IDの次の記事を取得
      *
-     * @param int $currentArticleId
+     * @param Carbon $createdAt
      * @return UArticle|null
      */
-    public function getNextArticle(int $currentArticleId): ?UArticle
+    public function getNextArticle(Carbon $createdAt): ?UArticle
     {
-        return $this->getArticles()->where('id', '>', $currentArticleId)->sortKeys()->first();
+        return $this->getArticles()->where('created_at', '<', $createdAt->toDateTimeString())
+            ->sortByDesc('created_at')->first();
     }
 
     /**
