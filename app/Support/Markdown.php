@@ -33,8 +33,6 @@ class Markdown
 
 
         $converter = new CommonMarkConverter([
-            'html_input'         => 'escape',
-            'allow_unsafe_links' => false,
             // commonmark-ext-youtube-iframe
             'youtube_iframe_width' => 600,
             'youtube_iframe_height' => 300,
