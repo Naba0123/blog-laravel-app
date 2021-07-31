@@ -27,7 +27,7 @@ class BlogAbstractController extends Controller
         $articleService = app(ArticleService::class);
 
         $params = [
-            'categories' => $articleService->getCategories()
+            'categories' => $articleService->getCategories()->sortBy('name')
         ];
 
         foreach ($params as $key => $value) {

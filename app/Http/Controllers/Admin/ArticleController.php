@@ -46,7 +46,7 @@ class ArticleController extends AdminAbstractController
             $article = new UArticle();
         }
 
-        $categories = $articleService->getCategories();
+        $categories = $articleService->getCategories()->sortBy('name');
         $associatedCategoryIds = $article->categories->pluck('id')->all();
 
         return view('admin.article.edit', [
