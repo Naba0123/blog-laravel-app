@@ -63,7 +63,7 @@
 
 .lb-article-body {
     margin: 2rem 0 4rem;
-    line-height: 2rem;
+    line-height: 1.8rem;
     letter-spacing: 0.02rem;
 
     .lb-article-summary {
@@ -158,6 +158,10 @@
         max-width: 100%;
         box-shadow: 0 0 0.5rem lightgray;
         margin: 1rem 0;
+    }
+
+    p {
+        margin-bottom: 2rem;
     }
 
     pre {

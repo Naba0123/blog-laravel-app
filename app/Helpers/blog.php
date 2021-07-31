@@ -38,7 +38,7 @@ if (!function_exists('omit_markdown_str')) {
      * @param string $marker
      * @return string
      */
-    function omit_markdown_str(string $str, int $width = 100, string $marker = '……'): string
+    function omit_markdown_str(string $str, int $width = 300, string $marker = '……'): string
     {
         return mb_strimwidth(strip_tags(markdown_to_html($str)), 0, $width, $marker, 'UTF-8');
     }
