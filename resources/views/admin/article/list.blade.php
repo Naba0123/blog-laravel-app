@@ -55,7 +55,9 @@
 @section('content-script')
     <script>
         $(function() {
-            $('#lb-table').dataTable({});
+            $('#lb-table').dataTable({
+                "order": [[6, "desc"]]
+            });
         });
     </script>
 @endsection
