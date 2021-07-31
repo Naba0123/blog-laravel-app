@@ -93,3 +93,39 @@ if (!function_exists('header_image_url')) {
     }
 }
 
+if (!function_exists('pagination_buttons')) {
+    /**
+     * @param int $page
+     * @param int $maxPage
+     * @return array
+     */
+    function pagination_buttons(int $page, int $maxPage): array
+    {
+        if ($maxPage == 1) {
+            return [1];
+        }
+
+        $prevLinks = [];
+        $nextLinks = [];
+
+        $now = $page;
+        $i = 1;
+        while(($now -= $i) > 1) {
+            $prevLinks[] = $now;
+            $i *= 2;
+        }
+        $now = $page;
+        $i = 1;
+        while(($now += $i) < $maxPage) {
+            $nextLinks[] = $now;
+            $i *= 2;
+        }
+
+        if ($page == 1 || $page == $maxPage) {
+            return array_merge([1], array_reverse($prevLinks), $nextLinks, [$maxPage]);
+        }
+
+        return array_merge([1], array_reverse($prevLinks), [$page], $nextLinks, [$maxPage]);
+    }
+}
+

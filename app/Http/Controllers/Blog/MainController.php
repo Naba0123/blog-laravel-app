@@ -11,8 +11,18 @@ class MainController extends BlogAbstractController
 {
     public function index(Request $request)
     {
-        $articles = app(ArticleService::class)->getArticles()->sortByDesc('created_at');
+        $page = $request->get('page', 1);
 
-        return view('blog.main.index', ['articles' => $articles]);
+        $articleGroup = app(ArticleService::class)->getArticles()
+            ->sortByDesc('created_at')
+            ->chunk(config('blog.article.article_num_per_page'));
+
+        $articles = $articleGroup->get($page - 1, collect());
+
+        return view('blog.main.index', [
+            'articles' => $articles,
+            'page' => $page,
+            'maxPage' => $articleGroup->count(),
+        ]);
     }
 }

@@ -1,5 +1,13 @@
 @import "variables";
 
+.lb-pagination-buttons {
+    margin: 2rem auto;
+    .page-link {
+        color: $textLinkColor;
+        border: 0;
+    }
+}
+
 .lb-content {
     border: 0.1rem gray;
     box-shadow: 0 0 0.5rem gray;
