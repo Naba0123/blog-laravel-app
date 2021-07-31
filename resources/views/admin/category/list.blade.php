@@ -25,7 +25,8 @@
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->articles->count() }}</td>
                         <td>
-                            <button class="btn btn-primary lb-open-edit-modal" data-category='@json($category)'>Edit</button>
+                            <button class="btn btn-primary lb-open-edit-modal" data-category='@json($category)'
+                                    onclick="lbScript.openEditModal($(this).data('category'));">Edit</button>
                             <form action="{{ route('admin.category.delete') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="category_id" value="{{ $category->id }}"/>
