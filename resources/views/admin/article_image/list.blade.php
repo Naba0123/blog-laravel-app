@@ -32,6 +32,7 @@
             <table id="lb-table" class="table table-bordered">
                 <thead>
                 <tr>
+                    <th>Updated At</th>
                     <th>Filename</th>
                     <th>Preview</th>
                     <th>Size</th>
@@ -45,6 +46,7 @@
                         $dataForJson = ['name' => $image->getFilename(), 'url' => image_url($image)];
                     @endphp
                     <tr>
+                        <td>{{ date('Y-m-d H:i:s', $image->getATime()) }}</td>
                         <td>{{ $image->getFilename() }}</td>
                         <td><img src="{{ image_url($image) }}" height="200" alt=""></td>
                         <td>{{ number_format(ceil($image->getSize() / 1024)) }} KB</td>
@@ -112,7 +114,9 @@
         };
 
         $(function() {
-            $('#lb-table').dataTable();
+            $('#lb-table').dataTable({
+                "order": [[0, "desc"]]
+            });
             $('.lb-open-update-modal').click(function() {
                 lbScript.openEditModal($(this).data('image'));
             });
