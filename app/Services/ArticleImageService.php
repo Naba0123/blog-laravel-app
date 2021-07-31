@@ -31,9 +31,9 @@ class ArticleImageService extends AbstractService
     public function saveImage(?string $filename, UploadedFile $file)
     {
         if ($filename) {
-            \Storage::disk('article_image')->putFileAs('', $file, $filename);
+            return \Storage::disk('article_image')->putFileAs('', $file, $filename);
         } else {
-            \Storage::disk('article_image')->putFile('', $file);
+            return \Storage::disk('article_image')->putFile('', $file);
         }
     }
 

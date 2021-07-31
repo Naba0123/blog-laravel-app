@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function() {
     Route::prefix('/article_image')->name('article_image.')->group(function() {
         Route::get('/list', 'ArticleImageController@list')->name('list');
         Route::post('/upload', 'ArticleImageController@upload')->name('upload');
+        Route::post('/upload/ajax', 'ArticleImageController@uploadAjax')->name('upload.ajax');
         Route::post('/delete', 'ArticleImageController@delete')->name('delete');
     });
     // Setting

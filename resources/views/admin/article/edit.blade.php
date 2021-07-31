@@ -66,6 +66,12 @@
 
 @section('content-script')
     <script>
+        let lb = {
+            switchForm: function(target, isDisabled) {
+                $('input[name=' + target + ']').prop('disabled', isDisabled);
+            },
+        };
+
         $(function() {
             $('.lb-form-switch').change(function() {
                 const target = $(this).data('target');
@@ -76,6 +82,50 @@
                 lb.switchForm(target, isDisabled);
             });
 
+            let $body = $('textarea[name=body]');
+            $body.on('dragenter dragover', function (event) {
+                event.stopPropagation();
+                event.preventDefault();
+                $body.css('background-color', '#FAD689');
+            }).on('dragleave', function (event) {
+                event.stopPropagation();
+                event.preventDefault();
+                $body.css('background-color', 'white');
+            }).on('drop', function (event) {
+                event.preventDefault();
+
+                let file = event.originalEvent.dataTransfer.files[0];
+
+                // ファイルが画像が確認する
+                if (! file.type.match('image.*')) {
+                    alert('画像を選択してください');
+                    $body.css('background-color', 'white');
+                    return;
+                }
+
+                let fd = new FormData();
+                fd.append("file", file);
+
+                $.ajax({
+                    type:'POST',
+                    url: '{{ route('admin.article_image.upload.ajax') }}',
+                    data: fd,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json'
+                }).done(function(response){
+                    const insertText = '![](@' + response.filename + ')';
+                    const selectionStart = document.getElementsByName('body')[0].selectionStart;
+                    const text = $body.val();
+                    $body.val(text.substr(0, selectionStart) + insertText + text.substr(selectionStart));
+                }).fail(function(){
+                    alert('error')
+                }).always(function(){
+                    $body.css('background-color', 'white');
+                });
+            });
+
             @foreach (['created_at', 'updated_at'] as $target)
                 @if (old($target) !== null)
                     $('input[data-target={{ $target }}]').prop('checked', true);
@@ -83,11 +133,5 @@
                 @endif
             @endforeach
         });
-
-        let lb = {
-            switchForm: function(target, isDisabled) {
-                $('input[name=' + target + ']').prop('disabled', isDisabled);
-            },
-        };
     </script>
 @endsection

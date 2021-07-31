@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Services\ArticleImageService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -49,6 +50,29 @@ class ArticleImageController extends AdminAbstractController
         }
 
         return redirect()->route('admin.article_image.list')->withSuccess('Image Uploaded');
+    }
+
+    /**
+     * Upload image (ajax)
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws ValidationException
+     */
+    public function uploadAjax(Request $request): JsonResponse
+    {
+        $this->validate($request, [
+            'file' => 'required|file',
+        ]);
+
+        try {
+            $filename = app(ArticleImageService::class)->saveImage(null, $request->file('file'));
+        } catch (\Throwable $throwable) {
+            \Log::error($throwable);
+            return JsonResponse::create(['error' => $throwable->getMessage()]);
+        }
+
+        return JsonResponse::create(['filename' => $filename]);
     }
 
     /**
