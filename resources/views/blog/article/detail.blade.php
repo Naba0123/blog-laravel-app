@@ -18,7 +18,12 @@
 
         <hr/>
 
+        <div class="lb-article-sns-share">
+            @include('blog._parts.twitter_share_button')
+        </div>
+
         <div class="lb-article-body">
+
             <!-- Summary -->
             <div class="lb-article-summary">
                 <h4><i class="fas fa-comment"></i> Summary</h4>
@@ -26,6 +31,10 @@
             </div>
 
             {!! $bodyHtml !!}
+        </div>
+
+        <div class="lb-article-sns-share">
+            @include('blog._parts.twitter_share_button')
         </div>
 
         <hr class="mb-4 mt-4"/>
