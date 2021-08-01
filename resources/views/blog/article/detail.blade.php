@@ -5,6 +5,8 @@
         <div class="lb-article-header">
             @include('blog._parts.navigation_buttons', ['prev' => $prevLink, 'next' => $nextLink])
 
+            @include('blog._parts.google_adsense', ['client' => config('blog.adsense.client'), 'slot' => config('blog.adsense.slots.article_top')])
+
             <h1 class="lb-article-title">{{ $article->title }}</h1>
 
             @include('blog._parts.article_info', ['article' => $article])
@@ -38,6 +40,8 @@
         </div>
 
         <hr class="mb-4 mt-4"/>
+
+        @include('blog._parts.google_adsense', ['client' => config('blog.adsense.client'), 'slot' => config('blog.adsense.slots.article_bottom')])
 
         <div class="lb-article-footer">
             @include('blog._parts.related_articles', ['articles' => $relatedArticles])

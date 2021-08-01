@@ -17,6 +17,11 @@
     @include('blog._share.seo')
 
     @include('blog._share.gtag', ['gTagId' => config('blog.analytics.gtag_id')])
+
+    @if ($client = config('blog.adsense.client'))
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ $client }}"
+                crossorigin="anonymous"></script>
+    @endif
 </head>
 <body class="lb-bg-base">
 
