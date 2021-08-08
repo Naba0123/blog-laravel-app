@@ -50,6 +50,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        if (\App::environment('local')) {
+            return parent::render($request, $exception);
+        }
+
+        return response()->view('blog.error.min', [], 200);
     }
 }
