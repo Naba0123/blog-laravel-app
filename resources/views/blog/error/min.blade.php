@@ -51,7 +51,8 @@
 <body>
 <div class="flex-center position-ref full-height">
     <div class="message" style="padding: 10px;">
-        Something is wrong.
+        Something is wrong.<br>
+        <a href="/">Top Page.</a>
     </div>
 </div>
 </body>
